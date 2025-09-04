@@ -64,12 +64,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg">
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-                <div className="w-3 h-3 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
-              </div>
-            </div>
-            <span className="gravesend-sans text-2xl font-bold text-white tracking-wide">Obsidian Lifestyle</span>
+              <img src="/logo4.png" alt="Obsidian Lifestyle Logo" className="w-40 h-12" />
           </Link>
 
           {/* Desktop Navigation */}

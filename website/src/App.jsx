@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Mail, Phone, MapPin, Calendar, Users, Shield, Star, ArrowRight, Menu, X, Check } from 'lucide-react';
+import ObsidianHero from './components/hero';
+import { ChevronDown, Mail, Phone, MapPin, Calendar, Users, Shield, Star, ArrowRight, Menu, X, Check, Globe, Award  } from 'lucide-react';
+import { GrGroup } from "react-icons/gr";
+import { VscWorkspaceTrusted } from "react-icons/vsc";
+import { IoStarOutline } from "react-icons/io5";
 
-// Custom font loading component
+
 const FontLoader = () => {
   useEffect(() => {
-    // Load custom fonts and fallback fonts
     document.head.insertAdjacentHTML('beforeend', `
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -36,6 +39,15 @@ const FontLoader = () => {
           font-display: swap;
         }
         
+        /* Century Gothic Font Face */
+        @font-face {
+          font-family: 'Century Gothic Custom';
+          src: url('./fonts/weezerfont.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+        
         /* Font utility classes */
         .gravesend-sans {
           font-family: 'Gravesend Sans', 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,91 +56,205 @@ const FontLoader = () => {
         .roboto-font {
           font-family: 'Roboto', 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        .century-gothic {
+          font-family: 'Century Gothic Custom', 'Century Gothic', 'Arial', sans-serif;
+        }
+        
+        .page-transition {
+          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .magical-glow {
+          animation: magicalGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes magicalGlow {
+          0% { box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); }
+          100% { box-shadow: 0 0 40px rgba(250, 204, 21, 0.6); }
+        }
+        .floating-element {
+          animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .parallax-bg {
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        .luxury-gradient {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 25%, #d97706 50%, #b45309 75%, #92400e 100%);
+        }
+        .hospitality-card {
+          backdrop-filter: blur(20px);
+          background: rgba(17, 24, 39, 0.7);
+          border: 1px solid rgba(250, 204, 21, 0.2);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hospitality-card:hover {
+          transform: translateY(-10px) scale(1.02);
+          background: rgba(17, 24, 39, 0.9);
+          border: 1px solid rgba(250, 204, 21, 0.4);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .entertainment-slideshow {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          opacity: 0.1;
+          background-size: cover;
+          background-position: center;
+          animation: slideshow 20s infinite;
+        }
+        @keyframes slideshow {
+          0%, 20% { opacity: 0.1; }
+          25%, 45% { opacity: 0.3; }
+          50%, 70% { opacity: 0.1; }
+          75%, 95% { opacity: 0.2; }
+          100% { opacity: 0.1; }
+        }
       </style>
     `);
   }, []);
-
   return null;
 };
 
-// Header Component
+// Enhanced Header Component with Magical Mobile Navigation
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (path) => location.pathname === path;
 
+  const navItems = [
+    { path: '/', label: 'Home', icon: '🏠' },
+    { path: '/newsletter', label: 'Newsletter', icon: '📧' },
+    { path: '/events', label: 'Events', icon: '🎪' },
+    { path: '/contact', label: 'Contact', icon: '📞' }
+  ];
+
   return (
-    <header className="fixed top-0 w-full bg-black/90 backdrop-blur-lg z-50 border-b border-yellow-600/20">
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-black/95 backdrop-blur-xl border-b border-yellow-400/30 shadow-2xl shadow-yellow-500/10' 
+        : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-              <img src="/logo4.png" alt="Obsidian Lifestyle Logo" className="w-40 h-12" />
+          {/* Enhanced Logo */}
+          <Link to="/" className="group flex items-center space-x-3 relative">
+            <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
+            <div className="relative">
+              <img src="/logo4.png" alt="Obsidian Lifestyle Logo" className="w-40 h-12 transition-all duration-300 group-hover:scale-105" />
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Enhanced Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className={`roboto-font transition-all duration-300 ${
-                isActive('/') 
-                  ? 'text-yellow-400 border-b-2 border-yellow-400' 
-                  : 'text-white hover:text-yellow-300'
-              } pb-1`}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/newsletter" 
-              className={`roboto-font transition-all duration-300 ${
-                isActive('/newsletter') 
-                  ? 'text-yellow-400 border-b-2 border-yellow-400' 
-                  : 'text-white hover:text-yellow-300'
-              } pb-1`}
-            >
-              Newsletter
-            </Link>
-            <Link 
-              to="/events" 
-              className={`roboto-font transition-all duration-300 ${
-                isActive('/events') 
-                  ? 'text-yellow-400 border-b-2 border-yellow-400' 
-                  : 'text-white hover:text-yellow-300'
-              } pb-1`}
-            >
-              Upcoming Events
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`roboto-font transition-all duration-300 ${
-                isActive('/contact') 
-                  ? 'text-yellow-400 border-b-2 border-yellow-400' 
-                  : 'text-white hover:text-yellow-300'
-              } pb-1`}
-            >
-              Contact
-            </Link>
+            {navItems.map(({ path, label }) => (
+              <Link 
+                key={path}
+                to={path} 
+                className={`relative gravesend-sans font-medium transition-all duration-500 group ${
+                  isActive(path) 
+                    ? 'text-yellow-400' 
+                    : 'text-white hover:text-yellow-300'
+                } pb-1`}
+              >
+                <span className="relative z-10">{label}</span>
+                {isActive(path) && (
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                )}
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-300 group-hover:w-full"></div>
+              </Link>
+            ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Magical Mobile Menu Button */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden relative w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 backdrop-blur-xl border border-yellow-400/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <div className={`relative w-6 h-6 transform transition-all duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
+              {isMenuOpen ? (
+                <X size={20} className="text-yellow-400" />
+              ) : (
+                <Menu size={20} className="text-yellow-400" />
+              )}
+            </div>
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Magical Mobile Navigation Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-yellow-600/20">
-            <nav className="flex flex-col space-y-4">
-              <Link to="/" className="text-white hover:text-yellow-300 roboto-font" onClick={() => setIsMenuOpen(false)}>Home</Link>
-              <Link to="/newsletter" className="text-white hover:text-yellow-300 roboto-font" onClick={() => setIsMenuOpen(false)}>Newsletter</Link>
-              <Link to="/events" className="text-white hover:text-yellow-300 roboto-font" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
-              <Link to="/contact" className="text-white hover:text-yellow-300 roboto-font" onClick={() => setIsMenuOpen(false)}>Contact</Link>
-            </nav>
+          <div className="md:hidden fixed inset-0 top-20 bg-black/95 backdrop-blur-2xl z-40">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-yellow-600/10"></div>
+            
+            {/* Floating Elements */}
+            <div className="absolute top-10 left-10 w-2 h-2 bg-yellow-400/50 rounded-full floating-element"></div>
+            <div className="absolute top-32 right-16 w-1 h-1 bg-yellow-500/70 rounded-full floating-element" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-yellow-300/60 rounded-full floating-element" style={{animationDelay: '2s'}}></div>
+            
+            <div className="relative z-10 p-8 h-full flex flex-col justify-center">
+              <nav className="space-y-8">
+                {navItems.map(({ path, label, icon }, index) => (
+                  <Link
+                    key={path}
+                    to={path}
+                    className={`group flex items-center space-x-6 p-4 rounded-2xl transition-all duration-500 transform hover:scale-105 ${
+                      isActive(path)
+                        ? 'bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border border-yellow-400/40 shadow-2xl shadow-yellow-500/20'
+                        : 'hover:bg-yellow-400/10 hover:border hover:border-yellow-400/30'
+                    }`}
+                    style={{
+                      animationDelay: `${index * 0.1}s`,
+                      animation: 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                    }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className={`text-3xl transition-all duration-300 group-hover:scale-110 ${
+                      isActive(path) ? 'filter drop-shadow-lg' : ''
+                    }`}>
+                      {icon}
+                    </div>
+                    <div className="flex-1">
+                      <div className={`gravesend-sans text-2xl font-semibold transition-all duration-300 ${
+                        isActive(path) ? 'text-yellow-400' : 'text-white group-hover:text-yellow-300'
+                      }`}>
+                        {label}
+                      </div>
+                      {isActive(path) && (
+                        <div className="text-sm text-yellow-400/80 roboto-font">Currently viewing</div>
+                      )}
+                    </div>
+                    <ArrowRight className={`w-6 h-6 transition-all duration-300 group-hover:translate-x-2 ${
+                      isActive(path) ? 'text-yellow-400' : 'text-gray-400 group-hover:text-yellow-400'
+                    }`} />
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
         )}
       </div>
@@ -138,57 +264,130 @@ const Header = () => {
 
 // Footer Component
 const Footer = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <footer className="bg-gradient-to-t from-black to-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-full flex items-center justify-center">
-                <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+    <footer className="relative bg-gradient-to-b from-gray-900 via-black to-black text-white py-16 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-transparent to-yellow-600/5"></div>
+      </div>
+      
+      {/* Floating Luxury Elements */}
+      <div className="absolute top-8 left-8 w-3 h-3 bg-yellow-400/40 rounded-full floating-element"></div>
+      <div className="absolute top-16 right-12 w-2 h-2 bg-yellow-500/50 rounded-full floating-element" style={{animationDelay: '2s'}}></div>
+      <div className="absolute bottom-12 left-1/4 w-2.5 h-2.5 bg-yellow-300/30 rounded-full floating-element" style={{animationDelay: '4s'}}></div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Enhanced Brand Section */}
+          <div className="lg:col-span-2">
+            <div className="group flex items-center space-x-4 mb-6">
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                <div className="relative w-14 h-14 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-full flex items-center justify-center shadow-2xl shadow-yellow-500/30 magical-glow">
+                  <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                    <div className="w-4 h-4 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full"></div>
+                  </div>
                 </div>
               </div>
-              <span className="gravesend-sans text-xl font-bold">Obsidian Lifestyle</span>
+              <div>
+                <span className="gravesend-sans text-2xl font-bold bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+                  Obsidian Lifestyle
+                </span>
+                <div className="text-xs text-yellow-400/80 century-gothic">Premium Hospitality Experiences</div>
+              </div>
             </div>
-            <p className="roboto-font text-gray-300 leading-relaxed">
-              Elite Access. Unforgettable Experiences. Your gateway to premier sporting entertainment.
+            <p className="century-gothic text-gray-300 leading-relaxed text-lg mb-6">
+              Elite Access. Unforgettable Experiences. Your gateway to the world's most prestigious sporting events with unmatched luxury and sophistication.
             </p>
-          </div>
-          
-          <div>
-            <h3 className="gravesend-sans text-lg font-semibold mb-4 text-yellow-400">Contact Information</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Phone size={16} className="text-yellow-400" />
-                <span className="roboto-font text-gray-300">+263 70 000 0000</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail size={16} className="text-yellow-400" />
-                <span className="roboto-font text-gray-300">hello@obsidian.lifestyle</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin size={16} className="text-yellow-400" />
-                <span className="roboto-font text-gray-300">1st Floor, My Building, No. 50 Street<br />Some Road, Harare, Zimbabwe</span>
+            
+            {/* Live Status Indicator */}
+            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="century-gothic text-green-400 text-sm">
+                Live Support Available • {currentTime.toLocaleTimeString()}
               </div>
             </div>
           </div>
           
-          <div>
-            <h3 className="gravesend-sans text-lg font-semibold mb-4 text-yellow-400">Quick Links</h3>
-            <div className="space-y-2">
-              <Link to="/" className="roboto-font text-gray-300 hover:text-yellow-300 transition-colors block">Home</Link>
-              <Link to="/newsletter" className="roboto-font text-gray-300 hover:text-yellow-300 transition-colors block">Newsletter</Link>
-              <Link to="/events" className="roboto-font text-gray-300 hover:text-yellow-300 transition-colors block">Upcoming Events</Link>
-              <Link to="/contact" className="roboto-font text-gray-300 hover:text-yellow-300 transition-colors block">Contact</Link>
+          {/* Enhanced Contact Information */}
+          <div className="space-y-6">
+            <h3 className="gravesend-sans text-xl font-semibold mb-6 text-yellow-400 flex items-center">
+              <Globe className="w-5 h-5 mr-2" />
+              Get In Touch
+            </h3>
+            <div className="space-y-4">
+              {[
+                { icon: Phone, text: '+263 70 000 0000', label: '24/7 Concierge' },
+                { icon: Mail, text: 'hello@obsidian.lifestyle', label: 'Premium Support' },
+                { icon: Mail, text: 'vip@obsidian.lifestyle', label: 'VIP Services' }
+              ].map((contact, index) => (
+                <div key={index} className="group flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-400/5 transition-all duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <contact.icon size={16} className="text-yellow-400" />
+                  </div>
+                  <div>
+                    <div className="century-gothic text-white group-hover:text-yellow-300 transition-colors">{contact.text}</div>
+                    <div className="century-gothic text-xs text-gray-400">{contact.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Enhanced Quick Links */}
+          <div className="space-y-6">
+            <h3 className="gravesend-sans text-xl font-semibold mb-6 text-yellow-400 flex items-center">
+              <Star className="w-5 h-5 mr-2" />
+              Exclusive Access
+            </h3>
+            <div className="space-y-3">
+              {[
+                { to: '/', label: 'Elite Experiences', desc: 'Premium packages' },
+                { to: '/newsletter', label: 'VIP Newsletter', desc: 'Insider access' },
+                { to: '/events', label: 'Upcoming Events', desc: 'Latest offerings' },
+                { to: '/contact', label: 'Personal Concierge', desc: 'Bespoke service' }
+              ].map((link, index) => (
+                <Link 
+                  key={index}
+                  to={link.to} 
+                  className="group flex items-center justify-between p-3 rounded-lg hover:bg-yellow-400/5 transition-all duration-300"
+                >
+                  <div>
+                    <div className="century-gothic text-gray-300 group-hover:text-yellow-300 transition-colors font-medium">
+                      {link.label}
+                    </div>
+                    <div className="century-gothic text-xs text-gray-500">{link.desc}</div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all duration-300" />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
         
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="roboto-font text-gray-400">
-            © 2025 Obsidian Lifestyle, a product of Bard Santner Markets. All rights reserved.
-          </p>
+        {/* Enhanced Footer Bottom */}
+        <div className="border-t border-gradient-to-r from-transparent via-yellow-600/30 to-transparent mt-12 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-6">
+              <p className="century-gothic text-gray-400 text-sm">
+                © 2025 Obsidian Lifestyle, a product of Bard Santner Markets. All rights reserved.
+              </p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 rounded-full border border-yellow-400/20">
+                <Award className="w-4 h-4 text-yellow-400" />
+                <span className="text-xs text-yellow-400 roboto-font">Premium Certified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -243,17 +442,17 @@ const Hero = () => {
 const Features = () => {
   const features = [
     {
-      icon: Shield,
+      icon: VscWorkspaceTrusted,
       title: "No Hidden Fees",
       description: "Transparent pricing with no surprises. What you see is what you pay."
     },
     {
-      icon: Users,
+      icon: GrGroup,
       title: "Group Bookings",
       description: "All seats together, even for large group bookings. No one gets left behind."
     },
     {
-      icon: Star,
+      icon: IoStarOutline,
       title: "Personalized Service",
       description: "Dedicated customer service tailored to your specific needs and preferences."
     }
@@ -266,7 +465,7 @@ const Features = () => {
           <h2 className="gravesend-sans text-4xl md:text-5xl font-bold text-white mb-6">
             The Obsidian Lifestyle Experience
           </h2>
-          <p className="roboto-font text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="century-gothic text-xl text-gray-300 max-w-3xl mx-auto">
             We guarantee premium experiences with uncompromising quality and attention to detail.
           </p>
         </div>
@@ -278,7 +477,7 @@ const Features = () => {
                 <feature.icon size={32} className="text-black" />
               </div>
               <h3 className="gravesend-sans text-2xl font-semibold text-white mb-4">{feature.title}</h3>
-              <p className="roboto-font text-gray-300 leading-relaxed">{feature.description}</p>
+              <p className="century-gothic text-gray-300 leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -291,7 +490,7 @@ const Features = () => {
 const HomePage = () => {
   return (
     <div className="pt-20">
-      <Hero />
+      <ObsidianHero />
       <Features />
       
       {/* Hospitality Offerings */}
@@ -339,7 +538,7 @@ const HomePage = () => {
               <div key={index} className="group relative p-6 bg-gradient-to-b from-gray-800/30 to-gray-900/30 rounded-xl border border-yellow-600/20 hover:border-yellow-400/40 transition-all duration-300 hover:transform hover:scale-105">
                 <div className="text-4xl mb-4">{offering.image}</div>
                 <h3 className="gravesend-sans text-xl font-semibold text-white mb-3">{offering.title}</h3>
-                <p className="roboto-font text-gray-300 text-sm leading-relaxed">{offering.description}</p>
+                <p className="century-gothic text-gray-300 text-sm leading-relaxed">{offering.description}</p>
               </div>
             ))}
           </div>
@@ -353,7 +552,7 @@ const HomePage = () => {
             <h2 className="gravesend-sans text-4xl md:text-5xl font-bold text-white mb-6">
               How It Works
             </h2>
-            <p className="roboto-font text-xl text-gray-300">
+            <p className="century-gothic text-xl text-gray-300">
               Simple. Seamless. Sophisticated.
             </p>
           </div>
@@ -381,7 +580,7 @@ const HomePage = () => {
                   <span className="gravesend-sans text-2xl font-bold text-black">{step.step}</span>
                 </div>
                 <h3 className="gravesend-sans text-2xl font-semibold text-white mb-4">{step.title}</h3>
-                <p className="roboto-font text-gray-300 leading-relaxed">{step.description}</p>
+                <p className="century-gothic text-gray-300 leading-relaxed">{step.description}</p>
                 
                 {index < 2 && (
                   <div className="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-yellow-400 to-transparent"></div>
@@ -417,7 +616,7 @@ const NewsletterPage = () => {
               Sporting Hospitality
             </span>
           </h1>
-          <p className="roboto-font text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="century-gothic text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Join the Obsidian Lifestyle insider list and gain priority access to official VIP packages for 
             Premier League football, Formula 1, golf, rugby, and more.
           </p>
@@ -427,15 +626,15 @@ const NewsletterPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="flex items-center space-x-3">
               <Check className="text-yellow-400" size={20} />
-              <span className="roboto-font text-white">Exclusive event alerts</span>
+              <span className="century-gothic text-white">Exclusive event alerts</span>
             </div>
             <div className="flex items-center space-x-3">
               <Check className="text-yellow-400" size={20} />
-              <span className="roboto-font text-white">Private hospitality offers</span>
+              <span className="century-gothic text-white">Private hospitality offers</span>
             </div>
             <div className="flex items-center space-x-3">
               <Check className="text-yellow-400" size={20} />
-              <span className="roboto-font text-white">Tailored experiences</span>
+              <span className="century-gothic text-white">Tailored experiences</span>
             </div>
           </div>
 
@@ -460,16 +659,16 @@ const NewsletterPage = () => {
 
           {isSubscribed && (
             <div className="mt-4 p-4 bg-green-500/20 border border-green-500/40 rounded-lg text-center">
-              <p className="text-green-400 roboto-font">Successfully subscribed! Welcome to Obsidian Lifestyle.</p>
+              <p className="text-green-400 century-gothic">Successfully subscribed! Welcome to Obsidian Lifestyle.</p>
             </div>
           )}
         </div>
 
         <div className="text-center">
-          <p className="roboto-font text-lg text-gray-300 mb-4">
+          <p className="century-gothic text-lg text-gray-300 mb-4">
             Your front-row seat to unforgettable moments starts here.
           </p>
-          <p className="roboto-font text-yellow-400 font-semibold">
+          <p className="century-gothic text-yellow-400 font-semibold">
             Elevate your matchday experience.
           </p>
         </div>
@@ -559,7 +758,7 @@ const EventsPage = () => {
           <h1 className="gravesend-sans text-5xl md:text-6xl font-bold text-white mb-6">
             Upcoming Events
           </h1>
-          <p className="roboto-font text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="century-gothic text-xl text-gray-300 max-w-3xl mx-auto">
             Discover our exclusive collection of premium sporting events with VIP hospitality packages.
           </p>
         </div>
@@ -570,7 +769,7 @@ const EventsPage = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-full roboto-font font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full century-gothic font-medium transition-all duration-300 ${
                 activeCategory === category
                   ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black'
                   : 'bg-gray-800/50 text-white hover:bg-gray-700/50 border border-yellow-600/20'
@@ -602,15 +801,15 @@ const EventsPage = () => {
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center space-x-2">
                     <Calendar size={16} className="text-yellow-400" />
-                    <span className="roboto-font text-gray-300 text-sm">{event.date}</span>
+                    <span className="century-gothic text-gray-300 text-sm">{event.date}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <MapPin size={16} className="text-yellow-400" />
-                    <span className="roboto-font text-gray-300 text-sm">{event.venue}</span>
+                    <span className="century-gothic text-gray-300 text-sm">{event.venue}</span>
                   </div>
                 </div>
                 
-                <p className="roboto-font text-gray-300 text-sm leading-relaxed mb-4">
+                <p className="century-gothic text-gray-300 text-sm leading-relaxed mb-4">
                   {event.description}
                 </p>
                 
@@ -618,7 +817,7 @@ const EventsPage = () => {
                   {event.features.slice(0, 2).map((feature, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <Check size={14} className="text-yellow-400" />
-                      <span className="roboto-font text-gray-300 text-xs">{feature}</span>
+                      <span className="century-gothic text-gray-300 text-xs">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -663,15 +862,15 @@ const EventsPage = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center space-x-3">
                     <Calendar size={20} className="text-yellow-400" />
-                    <span className="roboto-font text-white">{selectedEvent.date}</span>
+                    <span className="century-gothic text-white">{selectedEvent.date}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin size={20} className="text-yellow-400" />
-                    <span className="roboto-font text-white">{selectedEvent.venue}</span>
+                    <span className="century-gothic text-white">{selectedEvent.venue}</span>
                   </div>
                 </div>
 
-                <p className="roboto-font text-gray-300 leading-relaxed mb-6">
+                <p className="century-gothic text-gray-300 leading-relaxed mb-6">
                   {selectedEvent.description}
                 </p>
 
@@ -681,7 +880,7 @@ const EventsPage = () => {
                     {selectedEvent.features.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <Check size={16} className="text-yellow-400" />
-                        <span className="roboto-font text-gray-300">{feature}</span>
+                        <span className="century-gothic text-gray-300">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -746,7 +945,7 @@ const ContactForm = ({ eventTitle = "" }) => {
             <Check size={32} className="text-green-400" />
           </div>
           <h4 className="gravesend-sans text-xl font-semibold text-white mb-2">Request Submitted!</h4>
-          <p className="roboto-font text-gray-300">We'll contact you within 24 hours to discuss your booking.</p>
+          <p className="century-gothic text-gray-300">We'll contact you within 24 hours to discuss your booking.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -814,7 +1013,7 @@ const ContactForm = ({ eventTitle = "" }) => {
           ></textarea>
 
           <div className="mb-4">
-            <p className="roboto-font text-white mb-2">Preferred Contact Method:</p>
+            <p className="century-gothic text-white mb-2">Preferred Contact Method:</p>
             <div className="flex space-x-6">
               <label className="flex items-center space-x-2">
                 <input
@@ -836,14 +1035,14 @@ const ContactForm = ({ eventTitle = "" }) => {
                   onChange={handleChange}
                   className="text-yellow-400"
                 />
-                <span className="roboto-font text-gray-300">Phone</span>
+                <span className="century-gothic text-gray-300">Phone</span>
               </label>
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-4 rounded-full font-semibold text-lg roboto-font transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-105"
+            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-4 rounded-full font-semibold text-lg century-gothic transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-105"
           >
             Submit Booking Request
           </button>
@@ -862,7 +1061,7 @@ const ContactPage = () => {
           <h1 className="gravesend-sans text-5xl md:text-6xl font-bold text-white mb-6">
             Contact Us
           </h1>
-          <p className="roboto-font text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="century-gothic text-xl text-gray-300 max-w-3xl mx-auto">
             Ready to experience elite sporting hospitality? Get in touch with our team to discuss your requirements.
           </p>
         </div>
@@ -880,8 +1079,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="gravesend-sans text-xl font-semibold text-white mb-2">Phone</h3>
-                    <p className="roboto-font text-gray-300">+263 70 000 0000</p>
-                    <p className="roboto-font text-sm text-gray-400">Monday - Friday, 9AM - 6PM</p>
+                    <p className="century-gothic text-gray-300">+263 70 000 0000</p>
+                    <p className="century-gothic text-sm text-gray-400">Monday - Friday, 9AM - 6PM</p>
                   </div>
                 </div>
 
@@ -891,8 +1090,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="gravesend-sans text-xl font-semibold text-white mb-2">Email</h3>
-                    <p className="roboto-font text-gray-300">hello@obsidian.lifestyle</p>
-                    <p className="roboto-font text-gray-300">info@obsidianlifestyle.com</p>
+                    <p className="century-gothic text-gray-300">hello@obsidian.lifestyle</p>
+                    <p className="century-gothic text-gray-300">info@obsidianlifestyle.com</p>
                   </div>
                 </div>
 
@@ -902,7 +1101,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="gravesend-sans text-xl font-semibold text-white mb-2">Address</h3>
-                    <p className="roboto-font text-gray-300">
+                    <p className="century-gothic text-gray-300">
                       1st Floor, My Building, No. 50 Street<br />
                       Some Road, Harare, Zimbabwe
                     </p>
@@ -914,7 +1113,7 @@ const ContactPage = () => {
             {/* Call Back Feature */}
             <div className="bg-gradient-to-br from-yellow-400/10 to-yellow-600/10 rounded-2xl p-8 border border-yellow-600/30">
               <h3 className="gravesend-sans text-2xl font-bold text-white mb-4">Prefer a Call Back?</h3>
-              <p className="roboto-font text-gray-300 mb-6">
+              <p className="century-gothic text-gray-300 mb-6">
                 Leave your number and our team will call you back within 2 hours during business hours.
               </p>
               <div className="flex space-x-4">
@@ -923,7 +1122,7 @@ const ContactPage = () => {
                   placeholder="Your phone number"
                   className="flex-1 px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font"
                 />
-                <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 py-3 rounded-lg font-semibold roboto-font hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300">
+                <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 py-3 rounded-lg font-semibold century-gothic hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300">
                   Call Me
                 </button>
               </div>
@@ -971,7 +1170,7 @@ const ContactPage = () => {
             ].map((faq, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-xl p-6 border border-yellow-600/20">
                 <h3 className="gravesend-sans text-lg font-semibold text-white mb-3">{faq.question}</h3>
-                <p className="roboto-font text-gray-300 text-sm leading-relaxed">{faq.answer}</p>
+                <p className="century-gothic text-gray-300 text-sm leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>

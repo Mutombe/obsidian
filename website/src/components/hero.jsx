@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Calendar, Star, Trophy, Crown } from 'lucide-react';
+import { IoStarOutline } from 'react-icons/io5';
+
 
 // Enhanced Particle Field with Obsidian branding
 const ObsidianParticleField = () => {
@@ -216,7 +218,7 @@ const ObsidianHero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(255, 234, 156, 0.3)' }}
                 whileTap={{ scale: 0.98 }}
-                className="century-gothic group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
+                className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
               >
                 <span>Explore Packages</span>
                 <ArrowRight size={16} className="sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -225,20 +227,23 @@ const ObsidianHero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 234, 156, 0.1)' }}
                 whileTap={{ scale: 0.98 }}
-                className="century-gothic group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/20 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
+                className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/20 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
               >
                 <Calendar size={16} className="sm:w-5 sm:h-5" />
                 <span>View Events</span>
               </motion.button>
             </motion.div>
             
-            {/* Premium Features */}
+            {/* Premium Features - Enhanced z-index */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="relative flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-6 pt-4 sm:pt-6 text-xs sm:text-sm text-gray-400"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              className="relative z-20 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-6 pt-4 sm:pt-6 text-xs sm:text-sm text-gray-300"
+              style={{ 
+                fontFamily: 'Inter, system-ui, sans-serif',
+                textShadow: '0 1px 3px rgba(0,0,0,0.8)'
+              }}
             >
               {['No Hidden Fees', 'Group Bookings', 'Personalized Service'].map((feature, index) => (
                 <motion.div
@@ -248,12 +253,13 @@ const ObsidianHero = () => {
                   transition={{ duration: 0.5, delay: 1.4 + (index * 0.1) }}
                   className="flex items-center space-x-2"
                 >
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-400 rounded-full flex-shrink-0" />
-                  <span>{feature}</span>
+                  <span className="gravesend-sans"><IoStarOutline size={16} className="text-yellow-400" /></span>
+                  <span className="century-gothic">{feature}</span>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
+
         </div>
       </div>
       

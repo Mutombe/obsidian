@@ -344,4 +344,96 @@ const ObsidianNewsletter = () => {
   );
 };
 
+// Newsletter Page
+const NewsletterPage = () => {
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubscribed(true);
+    setTimeout(() => setIsSubscribed(false), 3000);
+    setEmail("");
+  };
+
+  return (
+    <div className="pt-20 min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      <div className="max-w-4xl mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h1 className="gravesend-sans text-5xl md:text-6xl font-bold text-white mb-6">
+            Experience Elite
+            <span className="block bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+              Sporting Hospitality
+            </span>
+          </h1>
+          <p className="century-gothic text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+            Join the Obsidian Lifestyle insider list and gain priority access to
+            official VIP packages for Premier League football, Formula 1, golf,
+            rugby, and more.
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-8 border border-yellow-600/20 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="flex items-center space-x-3">
+              <Check className="text-yellow-400" size={20} />
+              <span className="century-gothic text-white">
+                Exclusive event alerts
+              </span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Check className="text-yellow-400" size={20} />
+              <span className="century-gothic text-white">
+                Private hospitality offers
+              </span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Check className="text-yellow-400" size={20} />
+              <span className="century-gothic text-white">
+                Tailored experiences
+              </span>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 bg-black border border-yellow-600/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/30 hover:scale-105 whitespace-nowrap"
+              >
+                Subscribe Now
+              </button>
+            </div>
+          </form>
+
+          {isSubscribed && (
+            <div className="mt-4 p-4 bg-green-500/20 border border-green-500/40 rounded-lg text-center">
+              <p className="text-green-400 century-gothic">
+                Successfully subscribed! Welcome to Obsidian Lifestyle.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="text-center">
+          <p className="century-gothic text-lg text-gray-300 mb-4">
+            Your front-row seat to unforgettable moments starts here.
+          </p>
+          <p className="century-gothic text-yellow-400 font-semibold">
+            Elevate your matchday experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default ObsidianNewsletter;

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Calendar, Star, Trophy, Crown } from 'lucide-react';
 import { IoStarOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 
 // Enhanced Particle Field with Obsidian branding
@@ -144,6 +145,7 @@ const WindowLight = () => {
 
 const ObsidianHero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const navigate = useNavigate();
   
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -183,7 +185,7 @@ const ObsidianHero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="gravesend-sans relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white leading-tight"
+              className="gravesend-sans relative text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white leading-tight"
             >
               Elite Access.
               <motion.span 
@@ -218,6 +220,7 @@ const ObsidianHero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(255, 234, 156, 0.3)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => navigate('/events')}
                 className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
               >
                 <span>Explore Packages</span>
@@ -226,6 +229,7 @@ const ObsidianHero = () => {
               
               <motion.button
                 whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 234, 156, 0.1)' }}
+                onClick={() => navigate('/events')}
                 whileTap={{ scale: 0.98 }}
                 className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/20 flex items-center justify-center space-x-2 sm:space-x-3 w-full sm:w-auto"
               >

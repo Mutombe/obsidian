@@ -42,13 +42,13 @@ const Footer = () => {
       </div>
 
       {/* Floating Luxury Elements */}
-      <div className="absolute top-8 left-8 w-3 h-3 bg-yellow-400/40 rounded-full floating-element"></div>
+      <div className="absolute top-8 left-8 w-3 h-3 bg-yellow-400/40 floating-element"></div>
       <div
-        className="absolute top-16 right-12 w-2 h-2 bg-yellow-500/50 rounded-full floating-element"
+        className="absolute top-16 right-12 w-2 h-2 bg-yellow-500/50 floating-element"
         style={{ animationDelay: "2s" }}
       ></div>
       <div
-        className="absolute bottom-12 left-1/4 w-2.5 h-2.5 bg-yellow-300/30 rounded-full floating-element"
+        className="absolute bottom-12 left-1/4 w-2.5 h-2.5 bg-yellow-300/30 floating-element"
         style={{ animationDelay: "4s" }}
       ></div>
 
@@ -72,8 +72,8 @@ const Footer = () => {
             </p>
 
             {/* Live Status Indicator */}
-            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
+              <div className="w-3 rounded-lg h-3 bg-green-400 animate-pulse"></div>
               <div className="century-gothic text-green-400 text-sm">
                 Live Support Available • {currentTime.toLocaleTimeString()}
               </div>
@@ -106,9 +106,9 @@ const Footer = () => {
               ].map((contact, index) => (
                 <div
                   key={index}
-                  className="group flex items-center space-x-3 p-3 rounded-lg hover:bg-yellow-400/5 transition-all duration-300"
+                  className="group flex items-center space-x-3 p-3 hover:bg-yellow-400/5 transition-all duration-300"
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <contact.icon size={16} className="text-yellow-400" />
                   </div>
                   <div>
@@ -156,7 +156,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={link.to}
-                  className="group flex items-center justify-between p-3 rounded-lg hover:bg-yellow-400/5 transition-all duration-300"
+                  className="group flex items-center justify-between p-3 hover:bg-yellow-400/5 transition-all duration-300"
                 >
                   <div>
                     <div className="century-gothic text-gray-300 group-hover:text-yellow-300 transition-colors font-medium">
@@ -183,7 +183,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 rounded-full border border-yellow-400/20">
+              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 border border-yellow-400/20">
                 <Award className="w-4 h-4 text-yellow-400" />
                 <span className="text-xs text-yellow-400 roboto-font">
                   Premium Certified

@@ -158,7 +158,6 @@ const App = () => {
       <div className="min-h-screen bg-black text-white">
         <FontLoader />
         <ScrollToTop />
-        <Header />
 
         <Routes>
           <Route path="/" element={<HomePage />} />

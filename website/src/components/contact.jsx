@@ -9,6 +9,7 @@ import {
   Globe,
   Award,
 } from "lucide-react";
+import { IntegratedNavigation } from "./home";
 
 const ContactForm = ({ eventTitle = "" }) => {
   const [formData, setFormData] = useState({
@@ -49,14 +50,14 @@ const ContactForm = ({ eventTitle = "" }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-xl p-4 sm:p-6 border border-yellow-600/20">
+    <div className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 p-4 sm:p-6 border border-yellow-600/20">
       <h3 className="gravesend-sans text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
         Book Your Experience
       </h3>
 
       {isSubmitted ? (
         <div className="text-center py-6 sm:py-8">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500/20 flex items-center justify-center mx-auto mb-4">
             <Check size={24} className="text-green-400 sm:w-8 sm:h-8" />
           </div>
           <h4 className="gravesend-sans text-lg sm:text-xl font-semibold text-white mb-2">
@@ -75,7 +76,7 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
+              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
               required
             />
             <input
@@ -84,7 +85,7 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
+              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
               required
             />
           </div>
@@ -96,7 +97,7 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
+              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
               required
             />
             <input
@@ -106,7 +107,7 @@ const ContactForm = ({ eventTitle = "" }) => {
               onChange={handleChange}
               placeholder="Number of Guests"
               min="1"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
+              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
               required
             />
           </div>
@@ -118,7 +119,7 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.event}
               onChange={handleChange}
               placeholder="Event of Interest"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
+              className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font text-sm sm:text-base"
             />
           )}
 
@@ -128,7 +129,7 @@ const ContactForm = ({ eventTitle = "" }) => {
             onChange={handleChange}
             placeholder="Special Requirements or Questions"
             rows="4"
-            className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font resize-none text-sm sm:text-base"
+            className="century-gothic w-full px-3 sm:px-4 py-3 bg-black/50 border border-yellow-600/30 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors roboto-font resize-none text-sm sm:text-base"
           ></textarea>
 
           <div className="mb-4">
@@ -163,7 +164,7 @@ const ContactForm = ({ eventTitle = "" }) => {
 
           <button
             onClick={handleSubmit}
-            className="gravesend-sans w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg century-gothic transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-105"
+            className="gravesend-sans w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 sm:py-4 font-semibold text-base sm:text-lg century-gothic transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-105"
           >
             Submit Booking Request
           </button>
@@ -177,6 +178,7 @@ const ContactForm = ({ eventTitle = "" }) => {
 const ContactPage = () => {
   return (
     <div className="pt-36 sm:pt-36 min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      <IntegratedNavigation />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
         <div className="text-center mb-12 sm:mb-16">
           <h1 className="gravesend-sans text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
@@ -191,14 +193,14 @@ const ContactPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Information */}
           <div className="space-y-6 sm:space-y-8">
-            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-6 sm:p-8 border border-yellow-600/20">
+            <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-6 sm:p-8 border border-yellow-600/20">
               <h2 className="gravesend-sans text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
                 Get In Touch
               </h2>
 
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
                     <Phone size={16} className="text-black sm:w-5 sm:h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -215,7 +217,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
                     <Mail size={16} className="text-black sm:w-5 sm:h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -232,7 +234,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
                     <MapPin size={16} className="text-black sm:w-5 sm:h-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -250,7 +252,7 @@ const ContactPage = () => {
             </div>
 
             {/* Call Back Feature */}
-            <div className="bg-gradient-to-br from-yellow-400/10 to-yellow-600/10 rounded-2xl p-6 sm:p-8 border border-yellow-600/30">
+            <div className="bg-gradient-to-br from-yellow-400/10 to-yellow-600/10 p-6 sm:p-8 border border-yellow-600/30">
               <h3 className="gravesend-sans text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
                 Prefer a Call Back?
               </h3>
@@ -318,7 +320,7 @@ const ContactPage = () => {
             ].map((faq, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 rounded-xl p-4 sm:p-6 border border-yellow-600/20"
+                className="bg-gradient-to-br from-gray-800/30 to-gray-900/30 p-4 sm:p-6 border border-yellow-600/20"
               >
                 <h3 className="gravesend-sans text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">
                   {faq.question}

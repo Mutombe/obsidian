@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  ArrowRight,
+  ArrowRight, X, Menu
 } from "lucide-react";
 import { CiMenuFries } from "react-icons/ci";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
@@ -82,7 +82,7 @@ const Header = () => {
                 <Link
                   key={path}
                   to={path}
-                  className={`relative gravesend-sans font-medium transition-all duration-500 group ${
+                  className={`relative gravesend-sans font-light transition-all duration-500 group ${
                     isActive(path)
                       ? "text-yellow-400"
                       : "text-white hover:text-yellow-300"
@@ -215,6 +215,65 @@ const Header = () => {
     </>
   );
 };
+
+export const IntegratedNavigation = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navItems = [
+    { path: "/", label: "Home" },
+    { path: "/newsletter", label: "Newsletter" },
+    { path: "/events", label: "Events" },
+    { path: "/contact", label: "Contact" },
+  ];
+
+  return (
+    <nav
+      className={`fixed top-0 absolute w-full z-50 transition-all duration-500 ${
+        scrolled ? "bg-transparent" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl px-8 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo - Aligned with hero content */}
+          <div className="flex items-center space-x-3 lg:pl-8">
+            <img src="/logo4.png" alt="Logo" className="w-40 h-13" />
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map(({ path, label }) => (
+              <a
+                key={path}
+                href={path}
+                className="gravesend-sans text-white hover:text-yellow-400 transition-colors duration-300 font-light text-sm tracking-wide"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-yellow-400"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
 
 
 export default Header;

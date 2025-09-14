@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, MapPin, Check, X, Star, Trophy, Crown, Users } from 'lucide-react';
+import { IntegratedNavigation } from './home';
 
 const ObsidianEventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -101,6 +102,7 @@ const ObsidianEventsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pt-16 lg:pt-20">
+      <IntegratedNavigation />
       {/* Hero Section with Creative Typography */}
       <div className="relative overflow-hidden">
         <motion.div 
@@ -159,7 +161,7 @@ const ObsidianEventsPage = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(category)}
-              className={`gravesend-sans px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full font-medium transition-all duration-300 ${
+              className={`gravesend-sans px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-sm sm:text-base font-medium transition-all duration-300 ${
                 activeCategory === category
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-600 text-black shadow-lg shadow-yellow-400/25"
                   : "bg-gray-800/50 text-white hover:bg-gray-700/50 border border-yellow-600/20 hover:border-yellow-400/40"
@@ -211,7 +213,7 @@ const EventCard = ({ event, index, onSelect }) => {
     >
       {/* Image Section */}
       <motion.div 
-        className={`relative group overflow-hidden rounded-2xl sm:rounded-3xl h-64 sm:h-80 lg:h-96 ${isEven ? '' : 'lg:col-start-2'}`}
+        className={`relative group overflow-hidden h-64 sm:h-80 lg:h-96 ${isEven ? '' : 'lg:col-start-2'}`}
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.4 }}
       >
@@ -227,7 +229,7 @@ const EventCard = ({ event, index, onSelect }) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5 }}
-          className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-black/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center z-20"
+          className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-black/80 backdrop-blur-sm  p-3 sm:p-4 text-center z-20"
         >
           <div className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold text-yellow-400">{event.date}</div>
           <div className="gravesend-sans text-xs sm:text-sm text-gray-300">{event.month}</div>
@@ -235,7 +237,7 @@ const EventCard = ({ event, index, onSelect }) => {
         </motion.div>
 
         {/* Category Badge */}
-        <div className="gravesend-sans absolute bottom-4 sm:bottom-6 left-4 sm:left-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold rounded-full z-20 border border-yellow-400/30">
+        <div className="gravesend-sans absolute bottom-4 sm:bottom-6 left-4 sm:left-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold z-20 border border-yellow-400/30">
           {event.category}
         </div>
 
@@ -283,7 +285,7 @@ const EventCard = ({ event, index, onSelect }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + (idx * 0.1) }}
-                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 rounded-lg border border-yellow-400/10"
+                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 border border-yellow-400/10"
               >
                 <Check size={14} className="text-yellow-400 flex-shrink-0" />
                 <span className="century-gothic text-gray-300 text-xs sm:text-sm">{feature}</span>
@@ -295,7 +297,7 @@ const EventCard = ({ event, index, onSelect }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onSelect(event)}
-            className="gravesend-sans group bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30 flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
+            className="gravesend-sans group bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30 flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
           >
             <span>Reserve Your Experience</span>
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -319,11 +321,11 @@ const EventModal = ({ event, onClose }) => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
-        className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl sm:rounded-3xl border border-yellow-600/30 max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
+        className="bg-gradient-to-b from-gray-800 to-gray-900 border border-yellow-600/30 max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header with Image */}
-        <div className="relative h-48 sm:h-64 overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
+        <div className="relative h-48 sm:h-64 overflow-hidden sm:rounded-t-3xl">
           <img 
             src={event.image} 
             alt={event.title}
@@ -341,7 +343,7 @@ const EventModal = ({ event, onClose }) => {
           </button>
 
           <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
-            <span className="gravesend-sans px-2 sm:px-3 py-1 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold rounded-full border border-yellow-400/30">
+            <span className="gravesend-sans px-2 sm:px-3 py-1 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold border border-yellow-400/30">
               {event.category}
             </span>
             <h2 className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold mt-2 sm:mt-3 mb-1">{event.title}</h2>
@@ -379,7 +381,7 @@ const EventModal = ({ event, onClose }) => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 rounded-lg"
+                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30"
                   >
                     <Check size={14} className="text-yellow-400 flex-shrink-0" />
                     <span className="century-gothic text-gray-300 text-sm sm:text-base">{feature}</span>
@@ -400,14 +402,14 @@ const EventModal = ({ event, onClose }) => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-full transition-colors text-sm sm:text-base"
+                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gray-700 hover:bg-gray-600 text-white transition-colors text-sm sm:text-base"
                 >
                   More Info
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full font-semibold flex items-center justify-center gap-2 text-sm sm:text-base"
+                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   Book Now <ArrowRight size={16} />
                 </motion.button>

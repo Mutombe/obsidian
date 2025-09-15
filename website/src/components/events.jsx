@@ -94,7 +94,7 @@ const ObsidianEventsPage = () => {
     }
   ];
 
-  const categories = ["All", "Football", "Formula 1", "Rugby", "Golf", "Tennis"];
+  const categories = ["All", "Football", "Formula 1", "Rugby", "Golf", "Concerts", "Other"];
 
   const filteredEvents = activeCategory === "All" 
     ? events 
@@ -102,7 +102,7 @@ const ObsidianEventsPage = () => {
 
   return (
     <div className="min-h-screen">
-      <IntegratedNavigation />
+      <IntegratedNavigation pageType="dark" />
       
       {/* Hero Section with Creative Typography - Keep Dark */}
       <div className="relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black pt-16 lg:pt-20">
@@ -148,7 +148,7 @@ const ObsidianEventsPage = () => {
         </div>
 
         {/* Category Filter - Keep Dark */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -176,9 +176,9 @@ const ObsidianEventsPage = () => {
 
       {/* White-themed Events Section */}
       <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-0 sm:px-0">
           {/* Events Grid - White Theme */}
-          <div className="space-y-8 sm:space-y-12 py-16 sm:py-20">
+          <div className="space-y-8 sm:space-y-12 py-5 sm:py-20">
             {filteredEvents.map((event, index) => (
               <EventCard 
                 key={event.id} 
@@ -215,7 +215,7 @@ const EventCard = ({ event, index, onSelect }) => {
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className={`min-h-[80vh] sm:min-h-screen lg:min-h-[100vh] grid lg:grid-cols-2 gap-6 sm:gap-8 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}
+      className={`min-h-[40vh] lg:min-h-[60vh] flex grid lg:grid-cols-2 gap-6 sm:gap-8 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}
     >
       {/* Image Section */}
       <motion.div 

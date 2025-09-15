@@ -47,14 +47,14 @@ const ObsidianNewsletter = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <IntegratedNavigation />
+      <IntegratedNavigation pageType="dark" />
 
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('/news.jpg')`,
+            backgroundImage: `url('/news.jpg')`,
           }}
         />
         {/* Additional gradient overlay for depth */}
@@ -224,8 +224,8 @@ const ObsidianNewsletter = () => {
         </div>
       </div>
 
-      {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600"></div>
+      {/* Bottom accent 
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600"></div>*/}
     </div>
   );
 };

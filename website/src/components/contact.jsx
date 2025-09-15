@@ -229,7 +229,7 @@ const ContactPage = () => {
                       Email
                     </h3>
                     <p className="century-gothic text-gray-700 text-sm sm:text-base break-all">
-                      hello@obsidian.lifestyle
+                      hello@obsidian.lifestyle.com
                     </p>
                     <p className="century-gothic text-gray-700 text-sm sm:text-base break-all">
                       info@obsidianlifestyle.com
@@ -256,7 +256,7 @@ const ContactPage = () => {
             </div>
 
             {/* Call Back Feature */}
-            <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 p-6 sm:p-8">
+            <div className="bg-gradient-to-br from-slate-100 to-slate-200 border border-yellow-200 p-6 sm:p-8">
               <h3 className="gravesend-sans text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
                 Prefer a Call Back?
               </h3>
@@ -268,7 +268,7 @@ const ContactPage = () => {
                 <input
                   type="tel"
                   placeholder="Your phone number"
-                  className="flex-1 px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
+                  className="century-gothic flex-1 px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
                 />
                 <button className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-4 sm:px-6 py-3 font-semibold century-gothic hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 text-sm sm:text-base whitespace-nowrap">
                   Call Me

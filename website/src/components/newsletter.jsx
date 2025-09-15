@@ -23,11 +23,14 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { SiFsecure } from "react-icons/si";
 import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { IntegratedNavigation } from "./header";
 
 const ObsidianNewsletter = () => {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -200,7 +203,8 @@ const ObsidianNewsletter = () => {
               transition={{ delay: 1.8 }}
               className="flex items-center gap-4 pt-4"
             >
-              <button className="century-gothic group flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-sm">
+              <button className="century-gothic group flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
+              onClick={() => navigate("/events")}>
                 <Calendar size={16} />
                 <span>View Upcoming Events</span>
                 <ArrowRight

@@ -37,7 +37,7 @@ const ObsidianHero = () => {
       <div
         className="absolute inset-0 flex"
         style={{
-          backgroundImage: `url('/pic2.jpg')`,
+          backgroundImage: `url('/pp1.jpg')`,
           overflow: "hidden",
           marginTop: "0",
           paddingTop: "0",
@@ -130,7 +130,8 @@ const ObsidianHero = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16">
-              <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 w-full sm:w-auto justify-center">
+              <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 w-full sm:w-auto justify-center"
+              onClick={() => navigate("/newsletter")}>
                 <span>Explore Packages</span>
                 <ArrowRight
                   size={18}
@@ -138,7 +139,8 @@ const ObsidianHero = () => {
                 />
               </button>
 
-              <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3 w-full sm:w-auto justify-center">
+              <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3 w-full sm:w-auto justify-center"
+              onClick={() => navigate("/events")}>
                 <Calendar size={18} className="sm:w-5 sm:h-5" />
                 <span>View Events</span>
               </button>

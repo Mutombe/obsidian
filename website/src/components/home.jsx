@@ -42,8 +42,8 @@ const ObsidianHero = () => {
         {/* Left Half - Black & Gold */}
         <div className="w-1/2 bg-black relative">
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-yellow-400 to-yellow-600 rotate-45 blur-xl"></div>
-            <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-tl from-yellow-500 to-yellow-700 rotate-12 blur-lg"></div>
+            <div className="absolute top-1/4 left-1/4 w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-gradient-to-br from-yellow-400 to-yellow-600 rotate-45 blur-xl"></div>
+            <div className="absolute bottom-1/3 right-1/4 w-12 h-12 sm:w-18 sm:h-18 md:w-24 md:h-24 bg-gradient-to-tl from-yellow-500 to-yellow-700 rotate-12 blur-lg"></div>
           </div>
         </div>
 
@@ -63,11 +63,11 @@ const ObsidianHero = () => {
       <div className="relative z-10 w-full flex items-center min-h-screen">
         {/* Desktop: Content on Left Half - Aligned with logo */}
         <div className="hidden lg:block w-1/2">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:pl-8">
               <div className="max-w-2xl">
                 {/* Main Hero Text - Large and Left Aligned */}
-                <h1 className="gravesend-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight">
+                <h1 className="gravesend-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-6 sm:mb-8">
                   Elite Access.
                   <span className="block bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
                     Unforgettable
@@ -77,23 +77,23 @@ const ObsidianHero = () => {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="century-gothic text-xl text-gray-300 mb-12 leading-relaxed">
+                <p className="century-gothic text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 leading-relaxed">
                   Your gateway to premier sporting entertainment and
                   unforgettable VIP hospitality experiences
                 </p>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-6 mb-16">
-                  <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-10 py-5 text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 sm:mb-16">
+                  <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105">
                     <span>Explore Packages</span>
                     <ArrowRight
-                      size={20}
-                      className="group-hover:translate-x-1 transition-transform"
+                      size={18}
+                      className="sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"
                     />
                   </button>
 
-                  <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-10 py-5 text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3">
-                    <Calendar size={20} />
+                  <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center justify-center space-x-3">
+                    <Calendar size={18} className="sm:w-5 sm:h-5" />
                     <span>View Events</span>
                   </button>
                 </div>
@@ -104,11 +104,11 @@ const ObsidianHero = () => {
           </div>
         </div>
 
-        {/* Mobile/Tablet: Centered Content (Original Layout) */}
-        <div className="lg:hidden w-full flex items-center justify-center">
-          <div className="text-center max-w-6xl mx-auto px-8">
-            {/* Main Hero Text - Large and Centered */}
-            <h1 className="gravesend-sans text-6xl md:text-8xl font-light leading-none mb-8">
+        {/* Mobile/Tablet: Centered Content */}
+        <div className="lg:hidden w-full flex items-center justify-center px-4 sm:px-6">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Main Hero Text - Responsive sizing */}
+            <h1 className="gravesend-sans text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-none mb-6 sm:mb-8">
               <span className="text-white">ELITE</span>
               <br />
               <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
@@ -117,23 +117,23 @@ const ObsidianHero = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="century-gothic text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="century-gothic text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
               Your gateway to premier sporting entertainment and unforgettable
               VIP hospitality experiences
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-              <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-10 py-5 text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16">
+              <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 w-full sm:w-auto justify-center">
                 <span>Explore Packages</span>
                 <ArrowRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={18}
+                  className="sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"
                 />
               </button>
 
-              <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-10 py-5 text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3">
-                <Calendar size={20} />
+              <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3 w-full sm:w-auto justify-center">
+                <Calendar size={18} className="sm:w-5 sm:h-5" />
                 <span>View Events</span>
               </button>
             </div>

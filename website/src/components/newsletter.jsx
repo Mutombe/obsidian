@@ -62,21 +62,21 @@ const ObsidianNewsletter = () => {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-screen">
           {/* Left side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 pt-20 sm:pt-0"
           >
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="gravesend-sans text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight"
+                className="gravesend-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight"
               >
                 Experience  
                 <span className="block bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent font-normal">
@@ -88,7 +88,7 @@ const ObsidianNewsletter = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="century-gothic text-lg text-gray-200 leading-relaxed max-w-lg"
+                className="century-gothic text-base sm:text-lg text-gray-200 leading-relaxed max-w-lg"
               >
                 Join the Obsidian Lifestyle insider list and gain priority
                 access to official VIP packages for Premier League football,
@@ -108,7 +108,7 @@ const ObsidianNewsletter = () => {
                   onSubmit={handleSubmit}
                   className="space-y-4"
                 >
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <div className="relative flex-1">
                       <input
                         type="text"
@@ -117,7 +117,7 @@ const ObsidianNewsletter = () => {
                           handleInputChange("name", e.target.value)
                         }
                         placeholder="Enter your Name"
-                        className="century-gothic w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20"
+                        className="century-gothic w-full px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20 text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -129,8 +129,8 @@ const ObsidianNewsletter = () => {
                         onChange={(e) =>
                           handleInputChange("email", e.target.value)
                         }
-                        placeholder="Enter email "
-                        className="century-gothic w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20"
+                        placeholder="Enter email"
+                        className="century-gothic w-full px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20 text-sm sm:text-base"
                         required
                       />
                     </div>
@@ -139,7 +139,7 @@ const ObsidianNewsletter = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="century-gothic bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-8 py-3 font-medium tracking-wider hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300"
+                      className="century-gothic bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 font-medium tracking-wider hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 text-sm sm:text-base"
                     >
                       SUBSCRIBE
                     </motion.button>
@@ -151,20 +151,20 @@ const ObsidianNewsletter = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="text-center py-8 bg-black/50 backdrop-blur-sm border border-yellow-400/30"
+                  className="text-center py-6 sm:py-8 bg-black/50 backdrop-blur-sm border border-yellow-400/30"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-4"
+                    className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-3 sm:mb-4"
                   >
-                    <Check size={32} className="text-black" />
+                    <Check size={24} className="text-black sm:w-8 sm:h-8" />
                   </motion.div>
-                  <h3 className="gravesend-sans text-2xl font-light text-white mb-2">
+                  <h3 className="gravesend-sans text-xl sm:text-2xl font-light text-white mb-2">
                     Welcome to Elite Access!
                   </h3>
-                  <p className="century-gothic text-gray-300">
+                  <p className="century-gothic text-gray-300 text-sm sm:text-base px-4">
                     You're now part of the Obsidian Lifestyle community
                   </p>
                 </motion.div>
@@ -176,22 +176,22 @@ const ObsidianNewsletter = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="grid grid-cols-2 gap-4 pt-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6"
             >
               {[
-                { icon: Trophy, text: "Exclusive event alerts " },
-                { icon: Globe, text: "Private hospitality offers " },
-                { icon: Users, text: "Tailored experiences curated for you " },
+                { icon: Trophy, text: "Exclusive event alerts" },
+                { icon: Globe, text: "Private hospitality offers" },
+                { icon: Users, text: "Tailored experiences curated for you" },
               ].map((benefit, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.4 + index * 0.1 }}
-                  className="flex items-center gap-3 text-gray-300 bg-black/30 backdrop-blur-sm p-3 border border-white/10"
+                  className="flex items-center gap-3 text-gray-300 bg-black/30 backdrop-blur-sm p-3 sm:p-3 border border-white/10"
                 >
-                  <benefit.icon size={18} className="text-yellow-400" />
-                  <span className="century-gothic text-sm font-light">{benefit.text}</span>
+                  <benefit.icon size={16} className="text-yellow-400 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="century-gothic text-xs sm:text-sm font-light">{benefit.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -201,21 +201,26 @@ const ObsidianNewsletter = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.8 }}
-              className="flex items-center gap-4 pt-4"
+              className="flex items-center gap-3 sm:gap-4 pt-3 sm:pt-4"
             >
-              <button className="century-gothic group flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
-              onClick={() => navigate("/events")}>
-                <Calendar size={16} />
+              <button 
+                className="century-gothic group flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-xs sm:text-sm"
+                onClick={() => navigate("/events")}
+              >
+                <Calendar size={14} className="sm:w-4 sm:h-4 flex-shrink-0" />
                 <span>View Upcoming Events</span>
                 <ArrowRight
-                  size={14}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={12}
+                  className="group-hover:translate-x-1 transition-transform sm:w-4 sm:h-4"
                 />
               </button>
             </motion.div>
           </motion.div>
 
-          {/* Right side - Decorative Elements */}
+          {/* Right side - Decorative Elements - Hidden on mobile */}
+          <div className="hidden lg:block">
+            {/* Add any decorative content here if needed */}
+          </div>
         </div>
       </div>
 

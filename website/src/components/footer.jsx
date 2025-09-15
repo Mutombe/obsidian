@@ -72,12 +72,6 @@ const Footer = () => {
             </p>
 
             {/* Live Status Indicator */}
-            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-              <div className="w-3 rounded-lg h-3 bg-green-400 animate-pulse"></div>
-              <div className="century-gothic text-green-400 text-sm">
-                Live Support Available • {currentTime.toLocaleTimeString()}
-              </div>
-            </div>
           </div>
 
           {/* Enhanced Contact Information */}
@@ -183,12 +177,6 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 border border-yellow-400/20">
-                <Award className="w-4 h-4 text-yellow-400" />
-                <span className="text-xs text-yellow-400 roboto-font">
-                  Premium Certified
-                </span>
-              </div>
             </div>
           </div>
         </div>

@@ -17,64 +17,8 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { SiFsecure } from "react-icons/si";
 import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
+import { IntegratedNavigation } from "./header";
 
-export const IntegratedNavigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/newsletter", label: "Newsletter" },
-    { path: "/events", label: "Events" },
-    { path: "/contact", label: "Contact" },
-  ];
-
-  return (
-    <nav
-      className={`fixed top-0 absolute w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-transparent" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl px-8 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo - Aligned with hero content */}
-          <div className="flex items-center space-x-3 lg:pl-8">
-            <img src="/logo4.png" alt="Logo" className="w-40 h-13" />
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map(({ path, label }) => (
-              <a
-                key={path}
-                href={path}
-                className="gravesend-sans text-white hover:text-yellow-400 transition-colors duration-300 font-light text-sm tracking-wide"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-yellow-400"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
-};
 
 const ObsidianHero = () => {
   return (
@@ -83,7 +27,7 @@ const ObsidianHero = () => {
       style={{ overflow: "hidden", marginTop: "0", paddingTop: "0" }}
     >
       {/* Integrated Navigation */}
-      <IntegratedNavigation />
+      <IntegratedNavigation pageType="transparent" />
 
       {/* Split Background */}
       <div
@@ -155,26 +99,6 @@ const ObsidianHero = () => {
                 </div>
 
                 {/* Premium Features */}
-                <div className="flex flex-wrap gap-6 text-sm text-gray-300">
-                  <div className="flex items-center space-x-2">
-                    <MdOutlineSecurity size={16} className="text-yellow-400" />
-                    <span className="gravesend-sans font-light">
-                      No Hidden Fees
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <HiOutlineUserGroup size={16} className="text-yellow-400" />
-                    <span className="gravesend-sans font-light">
-                      Group Bookings
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <FaPeopleArrows size={16} className="text-yellow-400" />
-                    <span className="gravesend-sans font-light">
-                      Personalized Service
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -213,28 +137,6 @@ const ObsidianHero = () => {
                 <span>View Events</span>
               </button>
             </div>
-
-            {/* Premium Features - Centered */}
-            <div className="flex flex-wrap gap-6 justify-center text-sm text-gray-300">
-              <div className="flex items-center space-x-2">
-                <HiOutlineUserGroup size={16} className="text-yellow-400" />
-                <span className="gravesend-sans font-light">
-                  No Hidden Fees
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MdOutlineSecurity size={16} className="text-yellow-400" />
-                <span className="gravesend-sans font-light">
-                  Group Bookings
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaPeopleArrows size={16} className="text-yellow-400" />
-                <span className="gravesend-sans font-light">
-                  Personalized Service
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -245,7 +147,6 @@ const ObsidianHero = () => {
 const Features = () => {
   const features = [
     {
-      icon: HiOutlineUserGroup,
       title: "No Hidden Fees",
       description:
         "Transparent pricing with no surprises. What you see is what you pay. Our commitment to honest pricing means you can book with complete confidence.",
@@ -253,7 +154,6 @@ const Features = () => {
       image: "/pic5.jpg",
     },
     {
-      icon: MdOutlineSecurity,
       title: "Group Bookings",
       description:
         "All seats together, even for large group bookings. No one gets left behind. Experience seamless coordination for groups of any size.",
@@ -261,7 +161,6 @@ const Features = () => {
       image: "/pic16.jpg",
     },
     {
-      icon: FaPeopleArrows,
       title: "Personalized Service",
       description:
         "Dedicated customer service tailored to your specific needs and preferences. Every interaction is crafted around your unique requirements.",
@@ -269,7 +168,6 @@ const Features = () => {
       image: "/pic19.jpg",
     },
     {
-      icon: SiFsecure,
       title: "Premium Guarantee",
       description:
         "Quality assurance on every booking with our comprehensive satisfaction guarantee. Your peace of mind is our top priority.",
@@ -279,118 +177,79 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-b from-black via-gray-900 to-slate-900 relative overflow-hidden">
-      {/* Ambient background effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/5 via-transparent to-yellow-400/5"></div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500/3 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-400/3 rounded-full blur-3xl"></div>
-
+    <section className="py-20 lg:py-32 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
-          <div className="gravesend-sans inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-400/20 mb-6">
-            <span className="text-yellow-400 text-sm font-light tracking-wide uppercase">
-              Experience
-            </span>
-          </div>
-          <h2 className="gravesend-sans text-4xl sm:text-5xl lg:text-6xl font-light text-white mb-6 leading-tight">
+          <h2 className="gravesend-sans text-4xl sm:text-5xl lg:text-6xl font-light text-gray-900 mb-6 leading-tight">
             The Obsidian Lifestyle
             <span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
               Experience
             </span>
           </h2>
-          <p className="century-gothic text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          <p className="century-gothic text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             We guarantee premium experiences with uncompromising quality and
             attention to detail. Every touchpoint is designed to exceed your
             expectations.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="space-y-32">
+        {/* Features */}
+        <div className="space-y-16">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${
-                index % 2 === 1 ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              {/* Large Number with Image Fill */}
-              <div className="flex-shrink-0 relative">
-                <div className="relative">
-                  {/* Number with image fill using background-clip */}
-                  <div
-                    className="gravesend-sans font-bold text-[200px] lg:text-[280px]  leading-none select-none bg-cover bg-center bg-no-repeat"
-                    style={{
-                      backgroundImage: `url(${feature.image})`,
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                      color: "transparent",
-                    }}
-                  >
-                    {feature.number}
-                  </div>
+            <div key={index}>
+              <div
+                className={`flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 ${
+                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Large Number with Image Fill */}
+                <div className="flex-shrink-0 relative">
+                  <div className="relative">
+                    {/* Number with image fill using background-clip */}
+                    <div
+                      className="gravesend-sans font-bold text-[200px] lg:text-[280px] leading-none select-none bg-cover bg-center bg-no-repeat"
+                      style={{
+                        backgroundImage: `url(${feature.image})`,
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        color: "transparent",
+                      }}
+                    >
+                      {feature.number}
+                    </div>
 
-                  {/* Fallback/outline for browsers that don't support background-clip */}
-                  <div className="gravsend-sans font-light absolute inset-0 text-[200px] lg:text-[280px] leading-none select-none text-transparent bg-gradient-to-b from-gray-600/20 to-gray-800/10 bg-clip-text -z-10">
-                    {feature.number}
+                    {/* Fallback/outline for browsers that don't support background-clip */}
+                    <div className="gravesend-sans font-light absolute inset-0 text-[200px] lg:text-[280px] leading-none select-none text-transparent bg-gradient-to-b from-gray-400/20 to-gray-600/10 bg-clip-text -z-10">
+                      {feature.number}
+                    </div>
                   </div>
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-3 h-3 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent rounded-full opacity-60"></div>
+                  <div className="absolute top-1/2 -left-6 w-2 h-2 bg-yellow-500 rounded-full opacity-40"></div>
+                  <div className="absolute bottom-8 right-12 w-4 h-4 border-2 border-yellow-400/30 rounded-full"></div>
                 </div>
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-3 h-3 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent rounded-full opacity-60"></div>
-                <div className="absolute top-1/2 -left-6 w-2 h-2 bg-yellow-500 rounded-full opacity-40"></div>
-                <div className="absolute bottom-8 right-12 w-4 h-4 border-2 border-yellow-400/30 rounded-full"></div>
-              </div>
 
-              {/* Content */}
-              <div className="flex-1 text-center lg:text-left max-w-2xl">
-                <div className="flex items-center gap-4 justify-center lg:justify-start mb-6">
-                  <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-xl shadow-yellow-500/20">
-                    <feature.icon
-                      size={24}
-                      className="text-black lg:w-8 lg:h-8"
-                    />
-                  </div>
-                  <h3 className="gravesend-sans text-3xl lg:text-4xl font-light text-white leading-tight">
+                {/* Content */}
+                <div className="flex-1 text-center lg:text-left max-w-2xl">
+                  <h3 className="gravesend-sans text-3xl lg:text-4xl font-light text-gray-900 leading-tight mb-6">
                     {feature.title}
                   </h3>
+                  <p className="century-gothic text-lg lg:text-xl text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-                <p className="century-gothic text-lg lg:text-xl text-gray-300 leading-relaxed mb-8">
-                  {feature.description}
-                </p>
-
-                {/* Decorative line */}
-                <div
-                  className={`w-24 h-1 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent ${
-                    index % 2 === 1 ? "lg:ml-auto" : "mx-auto lg:mx-0"
-                  }`}
-                ></div>
               </div>
+
+              {/* Separator line - only show between features, not after the last one */}
+              {index < features.length - 1 && (
+                <div className="mt-16 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+              )}
             </div>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-32">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold  hover:shadow-2xl hover:shadow-yellow-500/30 transition-all duration-300 cursor-pointer group">
-            <span className="century-gothic text-lg">
-              Experience the Difference
-            </span>
-            <svg
-              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
       </div>
     </section>
   );

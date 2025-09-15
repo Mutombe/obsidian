@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, MapPin, Check, X, Star, Trophy, Crown, Users } from 'lucide-react';
-import { IntegratedNavigation } from './home';
+import { IntegratedNavigation } from './header';
 
 const ObsidianEventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -33,7 +33,7 @@ const ObsidianEventsPage = () => {
       category: "Formula 1",
       description: "The jewel in the F1 calendar with unparalleled luxury and glamour.",
       features: ["Paddock Access", "Yacht Hospitality", "Champagne Reception", "Grid Walk"],
-      image: "/home2.jpg",
+      image: "/home3.jpg",
       gradient: "from-orange-500/20 to-red-500/20"
     },
     {
@@ -101,10 +101,11 @@ const ObsidianEventsPage = () => {
     : events.filter((event) => event.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black pt-16 lg:pt-20">
+    <div className="min-h-screen">
       <IntegratedNavigation />
-      {/* Hero Section with Creative Typography */}
-      <div className="relative overflow-hidden">
+      
+      {/* Hero Section with Creative Typography - Keep Dark */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black pt-16 lg:pt-20">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -118,9 +119,9 @@ const ObsidianEventsPage = () => {
               initial={{ opacity: 0, scale: 1.2 }}
               animate={{ opacity: 0.03, scale: 1 }}
               transition={{ duration: 1.5 }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              className="gravesend-sans absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <h1 className="gravesend-sans text-[8rem] sm:text-[12rem] lg:text-[20rem] text-white leading-none select-none">
+              <h1 className="text-[8rem] sm:text-[12rem] lg:text-[20rem] text-white leading-none select-none font-bold">
                 Events
               </h1>
             </motion.div>
@@ -145,43 +146,48 @@ const ObsidianEventsPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Category Filter - Keep Dark */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-2 sm:gap-4"
+          >
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveCategory(category)}
+                className={`gravesend-sans px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-sm sm:text-base font-medium transition-all duration-300 ${
+                  activeCategory === category
+                    ? "bg-gradient-to-r from-yellow-400 to-yellow-600 text-black shadow-lg shadow-yellow-400/25"
+                    : "bg-gray-800/50 text-white hover:bg-gray-700/50 border border-yellow-600/20 hover:border-yellow-400/40"
+                }`}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Category Filter */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 sm:mb-16"
-        >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(category)}
-              className={`gravesend-sans px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-sm sm:text-base font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-600 text-black shadow-lg shadow-yellow-400/25"
-                  : "bg-gray-800/50 text-white hover:bg-gray-700/50 border border-yellow-600/20 hover:border-yellow-400/40"
-              }`}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Events Grid - Creative Layout */}
-        <div className="space-y-8 sm:space-y-12 mb-16 sm:mb-20">
-          {filteredEvents.map((event, index) => (
-            <EventCard 
-              key={event.id} 
-              event={event} 
-              index={index} 
-              onSelect={setSelectedEvent}
-            />
-          ))}
+      {/* White-themed Events Section */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          {/* Events Grid - White Theme */}
+          <div className="space-y-8 sm:space-y-12 py-16 sm:py-20">
+            {filteredEvents.map((event, index) => (
+              <EventCard 
+                key={event.id} 
+                event={event} 
+                index={index} 
+                onSelect={setSelectedEvent}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -229,15 +235,15 @@ const EventCard = ({ event, index, onSelect }) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5 }}
-          className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-black/80 backdrop-blur-sm  p-3 sm:p-4 text-center z-20"
+          className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-white/95 backdrop-blur-sm p-3 sm:p-4 text-center z-20 shadow-lg"
         >
-          <div className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold text-yellow-400">{event.date}</div>
-          <div className="gravesend-sans text-xs sm:text-sm text-gray-300">{event.month}</div>
-          <div className="gravesend-sans text-xs text-gray-400">{event.year}</div>
+          <div className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold text-yellow-600">{event.date}</div>
+          <div className="gravesend-sans text-xs sm:text-sm text-gray-600">{event.month}</div>
+          <div className="gravesend-sans text-xs text-gray-500">{event.year}</div>
         </motion.div>
 
         {/* Category Badge */}
-        <div className="gravesend-sans absolute bottom-4 sm:bottom-6 left-4 sm:left-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold z-20 border border-yellow-400/30">
+        <div className="gravesend-sans absolute bottom-4 sm:bottom-6 left-4 sm:left-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/95 backdrop-blur-sm text-yellow-600 text-xs sm:text-sm font-semibold z-20 border border-yellow-400/30 shadow-lg">
           {event.category}
         </div>
 
@@ -245,7 +251,7 @@ const EventCard = ({ event, index, onSelect }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
       </motion.div>
 
-      {/* Content Section */}
+      {/* Content Section - White Theme */}
       <div className={`space-y-4 sm:space-y-6 px-2 sm:px-0 ${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
         <motion.div
           initial={{ opacity: 0, x: isEven ? -50 : 50 }}
@@ -253,31 +259,28 @@ const EventCard = ({ event, index, onSelect }) => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-            <div className="w-8 sm:w-12 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full" />
-            <span className="gravesend-sans text-yellow-400 font-semibold text-xs sm:text-sm tracking-wider uppercase">
+            <div className="w-8 sm:w-12 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full" />
+            <span className="gravsend-sans text-yellow-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">
               Premium Event
             </span>
           </div>
 
-          <h2 className="gravesend-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight">
+          <h2 className="gravesend-sans text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-3 sm:mb-4 leading-tight">
             {event.title}
           </h2>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mb-4 sm:mb-6">
             <div className="flex items-center gap-2">
-              <MapPin size={18} className="text-yellow-400 flex-shrink-0" />
-              <span className="century-gothic text-gray-300 text-sm sm:text-base">{event.venue}</span>
-            </div>
-            <div className="gravesend-sans text-xl sm:text-2xl font-bold text-yellow-400">
-              {event.price}
+              <MapPin size={18} className="text-yellow-600 flex-shrink-0" />
+              <span className="century-gothic text-gray-700 text-sm sm:text-base">{event.venue}</span>
             </div>
           </div>
 
-          <p className="century-gothic text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
+          <p className="century-gothic text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
             {event.description}
           </p>
 
-          {/* Features Grid */}
+          {/* Features Grid - White Theme */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
             {event.features.slice(0, 4).map((feature, idx) => (
               <motion.div
@@ -285,10 +288,10 @@ const EventCard = ({ event, index, onSelect }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + (idx * 0.1) }}
-                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30 border border-yellow-400/10"
+                className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 border border-gray-200 hover:border-yellow-300 transition-colors"
               >
-                <Check size={14} className="text-yellow-400 flex-shrink-0" />
-                <span className="century-gothic text-gray-300 text-xs sm:text-sm">{feature}</span>
+                <Check size={14} className="text-yellow-600 flex-shrink-0" />
+                <span className="gravesend-sans text-gray-700 text-xs sm:text-sm">{feature}</span>
               </motion.div>
             ))}
           </div>
@@ -297,7 +300,7 @@ const EventCard = ({ event, index, onSelect }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onSelect(event)}
-            className="gravesend-sans group bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 sm:px-8 py-3 sm:py-4 font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30 flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
+            className="century-gothic group bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30 flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center"
           >
             <span>Reserve Your Experience</span>
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -321,11 +324,11 @@ const EventModal = ({ event, onClose }) => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
-        className="bg-gradient-to-b from-gray-800 to-gray-900 border border-yellow-600/30 max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
+        className="bg-white max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header with Image */}
-        <div className="relative h-48 sm:h-64 overflow-hidden sm:rounded-t-3xl">
+        <div className="relative h-48 sm:h-64 overflow-hidden">
           <img 
             src={event.image} 
             alt={event.title}
@@ -336,44 +339,44 @@ const EventModal = ({ event, onClose }) => {
           
           <button
             onClick={onClose}
-            className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 bg-black/50 backdrop-blur-sm hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10"
+            className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center text-gray-800 transition-colors z-10 shadow-lg"
           >
             <X size={16} className="sm:hidden" />
             <X size={20} className="hidden sm:block" />
           </button>
 
           <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
-            <span className="gravesend-sans px-2 sm:px-3 py-1 bg-yellow-400/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold border border-yellow-400/30">
+            <span className="gravesend-sans px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm text-yellow-400 text-xs sm:text-sm font-semibold border border-yellow-400/30 rounded">
               {event.category}
             </span>
             <h2 className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold mt-2 sm:mt-3 mb-1">{event.title}</h2>
-            <p className="gravesend-sans text-lg sm:text-xl font-semibold text-yellow-400">{event.price}</p>
+            {/* Price <p className="text-lg sm:text-xl font-semibold text-yellow-400">{event.price}</p>*/}
           </div>
         </div>
 
-        {/* Modal Content */}
+        {/* Modal Content - White Theme */}
         <div className="p-4 sm:p-6 lg:p-8">
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
             <div>
-              <h3 className="gravesend-sans text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Event Details</h3>
+              <h3 className="gravesend-sans text-lg sm:text-xl font-semibold text-black mb-3 sm:mb-4">Event Details</h3>
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <Calendar size={18} className="text-yellow-400 flex-shrink-0" />
-                  <span className="century-gothic text-white text-sm sm:text-base">{event.date} {event.month} {event.year}</span>
+                  <Calendar size={18} className="text-yellow-600 flex-shrink-0" />
+                  <span className="gravesend-sans text-gray-700 text-sm sm:text-base">{event.date} {event.month} {event.year}</span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <MapPin size={18} className="text-yellow-400 flex-shrink-0" />
-                  <span className="century-gothic text-white text-sm sm:text-base">{event.venue}</span>
+                  <MapPin size={18} className="text-yellow-600 flex-shrink-0" />
+                  <span className="gravesend-sans text-gray-700 text-sm sm:text-base">{event.venue}</span>
                 </div>
               </div>
               
-              <p className="century-gothic text-gray-300 leading-relaxed mt-4 sm:mt-6 text-sm sm:text-base">
+              <p className="century-gothic text-gray-600 leading-relaxed mt-4 sm:mt-6 text-sm sm:text-base">
                 {event.description}
               </p>
             </div>
 
             <div>
-              <h3 className="gravesend-sans text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Package Includes</h3>
+              <h3 className="gravesend-sans text-lg sm:text-xl font-semibold text-black mb-3 sm:mb-4">Package Includes</h3>
               <div className="grid gap-2 sm:gap-3">
                 {event.features.map((feature, index) => (
                   <motion.div
@@ -381,35 +384,35 @@ const EventModal = ({ event, onClose }) => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-800/30"
+                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 rounded border border-gray-200"
                   >
-                    <Check size={14} className="text-yellow-400 flex-shrink-0" />
-                    <span className="century-gothic text-gray-300 text-sm sm:text-base">{feature}</span>
+                    <Check size={14} className="text-yellow-600 flex-shrink-0" />
+                    <span className="gravesend-sans text-gray-700 text-sm sm:text-base">{feature}</span>
                   </motion.div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="border-t border-gray-700 pt-4 sm:pt-6">
+          {/* CTA Section - White Theme */}
+          <div className="border-t border-gray-200 pt-4 sm:pt-6">
             <div className="flex flex-col gap-4 sm:gap-6">
               <div className="text-center sm:text-left">
-                <h3 className="gravesend-sans text-xl sm:text-2xl font-bold text-white">Ready to Experience Excellence?</h3>
-                <p className="century-gothic text-gray-400 text-sm sm:text-base">Secure your VIP package today</p>
+                <h3 className="gravesend-sans text-xl sm:text-2xl font-bold text-black">Ready to Experience Excellence?</h3>
+                <p className="century-gothic text-gray-600 text-sm sm:text-base">Secure your VIP package today</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gray-700 hover:bg-gray-600 text-white transition-colors text-sm sm:text-base"
+                  className="century-gothic px-6 sm:px-8 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors text-sm sm:text-base rounded"
                 >
                   More Info
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold flex items-center justify-center gap-2 text-sm sm:text-base"
+                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold flex items-center justify-center gap-2 text-sm sm:text-base rounded"
                 >
                   Book Now <ArrowRight size={16} />
                 </motion.button>

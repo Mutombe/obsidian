@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useLocation,
-} from "react-router-dom";
-import {
-  ArrowRight, X, Menu
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { CiMenuFries } from "react-icons/ci";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
 import { TbBrandGoogleHome } from "react-icons/tb";
@@ -16,11 +7,12 @@ import { BsEnvelopeAt } from "react-icons/bs";
 import { MdOutlineEventNote } from "react-icons/md";
 import { IoIosContact } from "react-icons/io";
 
-// Enhanced Header Component with Fixed Mobile Navigation
-const Header = () => {
+export const IntegratedNavigation = ({ 
+  pageType = "transparent", // "transparent", "dark", or "light"
+  className = ""
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,13 +30,20 @@ const Header = () => {
       document.body.style.overflow = 'unset';
     }
     
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
-  const isActive = (path) => location.pathname === path;
+  // Get current page from URL
+  const getCurrentPage = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '/';
+  };
+
+  const isActive = (path) => getCurrentPage() === path;
 
   const navItems = [
     { path: "/", label: "Home", icon: TbBrandGoogleHome },
@@ -53,19 +52,62 @@ const Header = () => {
     { path: "/contact", label: "Contact", icon: IoIosContact },
   ];
 
+  // Get navigation background based on scroll and page type
+  const getNavigationBackground = () => {
+    // When scrolled, always show dark gradient
+    if (scrolled) {
+      return "bg-gradient-to-r from-black/95 via-slate-900/95 to-black/95 backdrop-blur-xl border-b border-yellow-400/30 shadow-2xl shadow-yellow-500/10";
+    }
+    
+    // When not scrolled, use pageType
+    switch (pageType) {
+      case "dark":
+        return "bg-gradient-to-r from-black/90 via-slate-900/90 to-black/90 backdrop-blur-md border-b border-yellow-400/20";
+      case "light":
+        return "bg-white/90 backdrop-blur-md border-b border-gray-200/50 shadow-sm";
+      case "transparent":
+      default:
+        return "bg-transparent";
+    }
+  };
+
+  // Get text colors based on current state
+  const getTextColors = () => {
+    const isLightBg = !scrolled && pageType === "light";
+    
+    if (isLightBg) {
+      return {
+        navText: "text-gray-800",
+        navHover: "hover:text-yellow-600",
+        activeText: "text-yellow-600",
+        buttonBg: "bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border-yellow-400/40",
+        buttonIcon: "text-yellow-600"
+      };
+    }
+    
+    // Dark or transparent background
+    return {
+      navText: "text-white",
+      navHover: "hover:text-yellow-300",
+      activeText: "text-yellow-400",
+      buttonBg: "bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border-yellow-400/30",
+      buttonIcon: "text-yellow-400"
+    };
+  };
+
+  const textColors = getTextColors();
+
+  console.log('Navigation state:', { pageType, scrolled, textColors }); // Debug log
+
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-black/95 backdrop-blur-xl border-b border-yellow-400/30 shadow-2xl shadow-yellow-500/10"
-            : "bg-transparent"
-        }`}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${getNavigationBackground()} ${className}`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Enhanced Logo */}
-            <Link to="/" className="group flex items-center space-x-3 relative">
+            {/* Logo */}
+            <a href="/" className="group flex items-center space-x-3 relative">
               <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
               <div className="relative">
                 <img
@@ -74,32 +116,32 @@ const Header = () => {
                   className="w-40 h-13 transition-all duration-300 group-hover:scale-105"
                 />
               </div>
-            </Link>
+            </a>
 
-            {/* Enhanced Desktop Navigation */}
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               {navItems.map(({ path, label }) => (
-                <Link
+                <a
                   key={path}
-                  to={path}
-                  className={`relative gravesend-sans font-light transition-all duration-500 group ${
+                  href={path}
+                  className={`relative gravesend-sans font-light transition-all duration-500 group pb-1 ${
                     isActive(path)
-                      ? "text-yellow-400"
-                      : "text-white hover:text-yellow-300"
-                  } pb-1`}
+                      ? textColors.activeText
+                      : `${textColors.navText} ${textColors.navHover}`
+                  }`}
                 >
                   <span className="relative z-10">{label}</span>
                   {isActive(path) && (
                     <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                   )}
                   <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full transition-all duration-300 group-hover:w-full"></div>
-                </Link>
+                </a>
               ))}
             </nav>
 
-            {/* Magical Mobile Menu Button */}
+            {/* Mobile Menu Button */}
             <button
-              className="md:hidden relative w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 backdrop-blur-xl border border-yellow-400/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
+              className={`md:hidden relative w-10 h-10 rounded-full backdrop-blur-xl border flex items-center justify-center transition-all duration-300 hover:scale-110 ${textColors.buttonBg}`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <div
@@ -110,10 +152,10 @@ const Header = () => {
                 {isMenuOpen ? (
                   <MdOutlineCloseFullscreen
                     size={20}
-                    className="text-yellow-400"
+                    className={textColors.buttonIcon}
                   />
                 ) : (
-                  <CiMenuFries size={20} className="text-yellow-400" />
+                  <CiMenuFries size={20} className={textColors.buttonIcon} />
                 )}
               </div>
             </button>
@@ -121,7 +163,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Separate Mobile Navigation Overlay - Fixed positioning */}
+      {/* Mobile Navigation Overlay */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-2xl z-40 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-yellow-600/10"></div>
@@ -137,13 +179,13 @@ const Header = () => {
             style={{ animationDelay: "2s" }}
           ></div>
 
-          {/* Navigation Content - Adjusted for full screen coverage */}
+          {/* Navigation Content */}
           <div className="relative z-10 p-8 pt-28 h-full flex flex-col justify-center overflow-y-auto">
             <nav className="space-y-8">
               {navItems.map(({ path, label, icon: IconComponent }, index) => (
-                <Link
+                <a
                   key={path}
-                  to={path}
+                  href={path}
                   className={`group flex items-center space-x-6 p-4 rounded-2xl transition-all duration-500 transform hover:scale-105 ${
                     isActive(path)
                       ? "bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border border-yellow-400/40 shadow-2xl shadow-yellow-500/20"
@@ -180,7 +222,7 @@ const Header = () => {
                       {label}
                     </div>
                     {isActive(path) && (
-                      <div className="text-sm text-yellow-400/80 roboto-font">
+                      <div className="text-sm text-yellow-400/80 century-gothic">
                         Currently viewing
                       </div>
                     )}
@@ -192,14 +234,31 @@ const Header = () => {
                         : "text-gray-400 group-hover:text-yellow-400"
                     }`}
                   />
-                </Link>
+                </a>
               ))}
             </nav>
+
+            {/* Contact Info in Mobile Menu */}
+            <div className="mt-12 pt-8 border-t border-yellow-400/20">
+              <div className="text-center">
+                <p className="century-gothic text-yellow-400/80 text-sm mb-2">
+                  Ready to book your experience?
+                </p>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="century-gothic">Get in Touch</span>
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Add required CSS for animations */}
+      {/* CSS for animations */}
       <style jsx>{`
         @keyframes fadeInUp {
           from {
@@ -215,65 +274,3 @@ const Header = () => {
     </>
   );
 };
-
-export const IntegratedNavigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/newsletter", label: "Newsletter" },
-    { path: "/events", label: "Events" },
-    { path: "/contact", label: "Contact" },
-  ];
-
-  return (
-    <nav
-      className={`fixed top-0 absolute w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-transparent" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl px-8 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo - Aligned with hero content */}
-          <div className="flex items-center space-x-3 lg:pl-8">
-            <img src="/logo4.png" alt="Logo" className="w-40 h-13" />
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map(({ path, label }) => (
-              <a
-                key={path}
-                href={path}
-                className="gravesend-sans text-white hover:text-yellow-400 transition-colors duration-300 font-light text-sm tracking-wide"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-yellow-400"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-
-
-export default Header;

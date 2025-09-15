@@ -5,7 +5,6 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { SiFsecure } from "react-icons/si";
 import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
-
 import { IntegratedNavigation } from './header';
 
 const ObsidianNewsletter = () => {

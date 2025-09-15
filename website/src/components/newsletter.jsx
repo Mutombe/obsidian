@@ -52,9 +52,9 @@ const ObsidianNewsletter = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
           style={{
-            backgroundImage: `url('/news.jpg')`,
+            backgroundImage: `url('/bg1.jpg')`,
           }}
         />
         {/* Additional gradient overlay for depth */}

@@ -47,8 +47,8 @@ export const IntegratedNavigation = ({
 
   const navItems = [
     { path: "/", label: "Home", icon: TbBrandGoogleHome },
+     { path: "/events", label: "Events", icon: MdOutlineEventNote },
     { path: "/newsletter", label: "Newsletter", icon: BsEnvelopeAt },
-    { path: "/events", label: "Events", icon: MdOutlineEventNote },
     { path: "/contact", label: "Contact", icon: IoIosContact },
   ];
 

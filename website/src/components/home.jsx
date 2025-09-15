@@ -9,6 +9,7 @@ import {
   X,
   Menu,
 } from "lucide-react";
+import HospitalityComponents from "./hero";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
 import { GrGroup } from "react-icons/gr";
 import { IoStarOutline } from "react-icons/io5";
@@ -18,9 +19,12 @@ import { SiFsecure } from "react-icons/si";
 import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { IntegratedNavigation } from "./header";
+import { useNavigate } from "react-router-dom";
 
 
 const ObsidianHero = () => {
+    const navigate = useNavigate();
+  
   return (
     <section
       className="relative min-h-screen flex overflow-hidden"
@@ -84,7 +88,8 @@ const ObsidianHero = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 sm:mb-16">
-                  <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105">
+                  <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105"
+                  onClick={() => navigate("/newsletter")}>
                     <span>Explore Packages</span>
                     <ArrowRight
                       size={18}
@@ -92,7 +97,8 @@ const ObsidianHero = () => {
                     />
                   </button>
 
-                  <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center justify-center space-x-3">
+                  <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center justify-center space-x-3"
+                  onClick={() => navigate("/events")}>
                     <Calendar size={18} className="sm:w-5 sm:h-5" />
                     <span>View Events</span>
                   </button>
@@ -255,152 +261,13 @@ const Features = () => {
   );
 };
 
-const HospitalityOfferings = () => {
-  const offerings = [
-    {
-      title: "Premier League Football",
-      description:
-        "VIP matchday packages with gourmet dining and premium seating",
-      image: "/home5.jpeg",
-    },
-    {
-      title: "Wembley Events",
-      description:
-        "Official hospitality experiences at the iconic Wembley Stadium",
-      image: "/pic24.jpg",
-    },
-    {
-      title: "Formula 1",
-      description: "Exclusive paddock access and luxury hospitality suites",
-      image: "/home2.jpg",
-    },
-    {
-      title: "Golf Championships",
-      description: "Elite golf tournament experiences with hospitality lounges",
-      image: "/bes1.jpg",
-    },
-    {
-      title: "Rugby Events",
-      description:
-        "Premium rugby hospitality with fine dining and entertainment",
-      image: "/home.jpg",
-    },
-    {
-      title: "Bespoke Experiences",
-      description:
-        "Custom tailored hospitality packages for any sporting event",
-      image: "/bes.jpg",
-    },
-  ];
-
-  return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-900 to-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="gravesend-sans text-3xl sm:text-4xl md:text-5xl font-light text-white mb-4 sm:mb-6">
-            Hospitality Offerings
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {offerings.map((offering, index) => (
-            <div
-              key={index}
-              className="group relative p-0 bg-gradient-to-b from-gray-800/30 to-gray-900/30 border border-yellow-600/20 hover:border-yellow-400/40 transition-all duration-300 hover:transform hover:scale-105 overflow-hidden"
-            >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('${offering.image}')`,
-                }}
-              >
-                <div className="absolute inset-0 bg-black/60"></div>
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-4 sm:p-6 h-full flex flex-col justify-end">
-                <h3 className="gravesend-sans text-lg sm:text-xl v text-white mb-2 sm:mb-3">
-                  {offering.title}
-                </h3>
-                <p className="century-gothic text-gray-300 text-sm leading-relaxed">
-                  {offering.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const HowItWorks = () => {
-  return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-black to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="gravesend-sans text-3xl sm:text-4xl md:text-5xl font-light text-white mb-4 sm:mb-6">
-            How It Works
-          </h2>
-          <p className="century-gothic text-lg sm:text-xl text-gray-300">
-            Simple. Seamless. Sophisticated.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-          {[
-            {
-              step: "01",
-              title: "Choose Your Event",
-              description:
-                "Select from our curated collection of premium sporting events and hospitality packages.",
-            },
-            {
-              step: "02",
-              title: "Secure Booking",
-              description:
-                "Complete your booking with our secure payment system and receive immediate confirmation.",
-            },
-            {
-              step: "03",
-              title: "VIP Experience",
-              description:
-                "Arrive, relax, and enjoy top-tier hospitality with our full concierge service.",
-            },
-          ].map((step, index) => (
-            <div key={index} className="relative text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-2xl shadow-yellow-500/30">
-                <span className="gravesend-sans text-xl sm:text-2xl font-bold text-black">
-                  {step.step}
-                </span>
-              </div>
-              <h3 className="gravesend-sans text-xl sm:text-2xl font-light text-white mb-3 sm:mb-4">
-                {step.title}
-              </h3>
-              <p className="century-gothic text-sm sm:text-base text-gray-300 leading-relaxed px-2">
-                {step.description}
-              </p>
-
-              {index < 2 && (
-                <div className="hidden md:block absolute top-8 sm:top-10 left-full w-full h-0.5 bg-gradient-to-r from-yellow-400 to-transparent"></div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-6 sm:mt-8 w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent mx-auto transition-colors duration-300"></div>
-    </section>
-  );
-};
 
 const HomePage = () => {
   return (
     <div className="pt-20">
       <ObsidianHero />
       <Features />
-      <HospitalityOfferings />
-      <HowItWorks />
+      <HospitalityComponents />
     </div>
   );
 };

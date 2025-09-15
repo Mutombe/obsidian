@@ -16,8 +16,8 @@ const ObsidianEventsPage = () => {
       year: "2025",
       venue: "Old Trafford",
       price: "From £850",
-      category: "Football",
-      description: "Experience the greatest rivalry in English football with premium hospitality at Old Trafford.",
+      category: "Soccer",
+      description: "Experience the greatest rivalry in English Soccer with premium hospitality at Old Trafford.",
       features: ["VIP Seating", "Gourmet Dining", "Meet & Greet", "Exclusive Lounge Access"],
       image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80",
       gradient: "from-red-500/20 to-blue-500/20"
@@ -72,8 +72,8 @@ const ObsidianEventsPage = () => {
       year: "2025",
       venue: "Wembley Stadium",
       price: "From £650",
-      category: "Football",
-      description: "English football's oldest competition at the home of football.",
+      category: "Soccer",
+      description: "English football's oldest competition at the home of Soccer.",
       features: ["Wembley Suite", "Three-Course Meal", "Bar Package", "Stadium Tour"],
       image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
       gradient: "from-blue-500/20 to-purple-500/20"
@@ -94,7 +94,7 @@ const ObsidianEventsPage = () => {
     }
   ];
 
-  const categories = ["All", "Football", "Formula 1", "Rugby", "Golf", "Concerts", "Other"];
+  const categories = ["All", "Soccer", "Formula 1", "Rugby", "Golf", "Tennis"];
 
   const filteredEvents = activeCategory === "All" 
     ? events 
@@ -119,9 +119,9 @@ const ObsidianEventsPage = () => {
               initial={{ opacity: 0, scale: 1.2 }}
               animate={{ opacity: 0.03, scale: 1 }}
               transition={{ duration: 1.5 }}
-              className="gravesend-sans absolute inset-0 flex items-center justify-center pointer-events-none"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <h1 className="text-[8rem] sm:text-[12rem] lg:text-[20rem] text-white leading-none select-none font-bold">
+              <h1 className="gravesend-sans text-[8rem] sm:text-[12rem] lg:text-[20rem] text-white leading-none select-none font-bold">
                 Events
               </h1>
             </motion.div>
@@ -176,9 +176,9 @@ const ObsidianEventsPage = () => {
 
       {/* White-themed Events Section */}
       <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-0 sm:px-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* Events Grid - White Theme */}
-          <div className="space-y-8 sm:space-y-12 py-5 sm:py-20">
+          <div className="space-y-8 sm:space-y-12 py-8 sm:py-16 lg:py-20">
             {filteredEvents.map((event, index) => (
               <EventCard 
                 key={event.id} 
@@ -215,11 +215,11 @@ const EventCard = ({ event, index, onSelect }) => {
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className={`min-h-[40vh] lg:min-h-[60vh] flex grid lg:grid-cols-2 gap-6 sm:gap-8 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}
+      className={`min-h-[40vh] lg:min-h-[60vh] flex flex-col lg:grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}
     >
       {/* Image Section */}
       <motion.div 
-        className={`relative group overflow-hidden h-64 sm:h-80 lg:h-96 ${isEven ? '' : 'lg:col-start-2'}`}
+        className={`relative group overflow-hidden h-64 sm:h-80 lg:h-96 w-full ${isEven ? '' : 'lg:col-start-2'}`}
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.4 }}
       >
@@ -252,7 +252,7 @@ const EventCard = ({ event, index, onSelect }) => {
       </motion.div>
 
       {/* Content Section - White Theme */}
-      <div className={`space-y-4 sm:space-y-6 px-2 sm:px-0 ${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
+      <div className={`space-y-4 sm:space-y-6 px-4 sm:px-6 lg:px-0 ${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
         <motion.div
           initial={{ opacity: 0, x: isEven ? -50 : 50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -260,7 +260,7 @@ const EventCard = ({ event, index, onSelect }) => {
         >
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 sm:w-12 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full" />
-            <span className="gravsend-sans text-yellow-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">
+            <span className="gravesend-sans text-yellow-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">
               Premium Event
             </span>
           </div>
@@ -272,7 +272,7 @@ const EventCard = ({ event, index, onSelect }) => {
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mb-4 sm:mb-6">
             <div className="flex items-center gap-2">
               <MapPin size={18} className="text-yellow-600 flex-shrink-0" />
-              <span className="century-gothic text-gray-700 text-sm sm:text-base">{event.venue}</span>
+              <span className="gravesend-sans text-gray-700 text-sm sm:text-base">{event.venue}</span>
             </div>
           </div>
 
@@ -350,7 +350,6 @@ const EventModal = ({ event, onClose }) => {
               {event.category}
             </span>
             <h2 className="gravesend-sans text-xl sm:text-2xl lg:text-3xl font-bold mt-2 sm:mt-3 mb-1">{event.title}</h2>
-            {/* Price <p className="text-lg sm:text-xl font-semibold text-yellow-400">{event.price}</p>*/}
           </div>
         </div>
 
@@ -384,7 +383,7 @@ const EventModal = ({ event, onClose }) => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 rounded border border-gray-200"
+                    className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 border border-gray-200"
                   >
                     <Check size={14} className="text-yellow-600 flex-shrink-0" />
                     <span className="gravesend-sans text-gray-700 text-sm sm:text-base">{feature}</span>
@@ -405,14 +404,14 @@ const EventModal = ({ event, onClose }) => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="century-gothic px-6 sm:px-8 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors text-sm sm:text-base rounded"
+                  className="century-gothic px-6 sm:px-8 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 transition-colors text-sm sm:text-base"
                 >
                   More Info
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold flex items-center justify-center gap-2 text-sm sm:text-base rounded"
+                  className="century-gothic px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   Book Now <ArrowRight size={16} />
                 </motion.button>

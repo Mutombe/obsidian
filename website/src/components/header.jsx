@@ -108,7 +108,7 @@ export const IntegratedNavigation = ({
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <a href="/" className="group flex items-center space-x-3 relative">
-              <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
+              <div className="absolute -inset-2  bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
               <div className="relative">
                 <img
                   src="/logo4.png"
@@ -169,13 +169,13 @@ export const IntegratedNavigation = ({
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-transparent to-yellow-600/10"></div>
 
           {/* Floating Elements */}
-          <div className="absolute top-10 left-10 w-2 h-2 bg-yellow-400/50 rounded-full animate-bounce"></div>
+          <div className="absolute top-10 left-10 w-2 h-2 bg-yellow-400/50 animate-bounce"></div>
           <div
-            className="absolute top-32 right-16 w-1 h-1 bg-yellow-500/70 rounded-full animate-bounce"
+            className="absolute top-32 right-16 w-1 h-1 bg-yellow-500/70 animate-bounce"
             style={{ animationDelay: "1s" }}
           ></div>
           <div
-            className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-yellow-300/60 rounded-full animate-bounce"
+            className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-yellow-300/60 animate-bounce"
             style={{ animationDelay: "2s" }}
           ></div>
 
@@ -186,7 +186,7 @@ export const IntegratedNavigation = ({
                 <a
                   key={path}
                   href={path}
-                  className={`group flex items-center space-x-6 p-4 rounded-2xl transition-all duration-500 transform hover:scale-105 ${
+                  className={`group flex items-center space-x-6 p-4 transition-all duration-500 transform hover:scale-105 ${
                     isActive(path)
                       ? "bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border border-yellow-400/40 shadow-2xl shadow-yellow-500/20"
                       : "hover:bg-yellow-400/10 hover:border hover:border-yellow-400/30"
@@ -246,7 +246,7 @@ export const IntegratedNavigation = ({
                 </p>
                 <a
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="century-gothic">Get in Touch</span>

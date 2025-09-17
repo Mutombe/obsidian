@@ -54,7 +54,7 @@ const ObsidianNewsletter = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
           style={{
-            backgroundImage: `url('/bg1.jpg')`,
+            backgroundImage: `url('https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/bg1.jpg')`,
           }}
         />
         {/* Additional gradient overlay for depth */}

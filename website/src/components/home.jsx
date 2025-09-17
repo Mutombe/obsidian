@@ -36,12 +36,6 @@ const ObsidianHero = () => {
       {/* Split Background */}
       <div
         className="absolute inset-0 flex"
-        style={{
-          backgroundImage: `url('/pp1.jpg')`,
-          overflow: "hidden",
-          marginTop: "0",
-          paddingTop: "0",
-        }}
       >
         {/* Left Half - Black & Gold */}
         <div className="w-1/2 bg-black relative">
@@ -55,7 +49,7 @@ const ObsidianHero = () => {
         <div
           className="w-1/2 relative bg-cover bg-center"
           style={{
-            backgroundImage: `url('/pp1.jpg')`,
+            backgroundImage: `url('https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pp1.jpg')`,
           }}
         >
           <div className="absolute inset-0"></div>
@@ -159,28 +153,28 @@ const Features = () => {
       description:
         "Transparent pricing with no surprises. What you see is what you pay. Our commitment to honest pricing means you can book with complete confidence.",
       number: "01",
-      image: "/pic5.jpg",
+      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic5.jpg",
     },
     {
       title: "Group Bookings",
       description:
         "All seats together, even for large group bookings. No one gets left behind. Experience seamless coordination for groups of any size.",
       number: "02",
-      image: "/pic16.jpg",
+      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic16.jpg",
     },
     {
       title: "Personalized Service",
       description:
         "Dedicated customer service tailored to your specific needs and preferences. Every interaction is crafted around your unique requirements.",
       number: "03",
-      image: "/pic19.jpg",
+      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic19.jpg",
     },
     {
       title: "Premium Guarantee",
       description:
         "Quality assurance on every booking with our comprehensive satisfaction guarantee. Your peace of mind is our top priority.",
       number: "04",
-      image: "/pic0.jpg",
+      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic0.jpg",
     },
   ];
 

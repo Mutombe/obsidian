@@ -1,3 +1,4 @@
+// App.js - Updated with Obsidian Cookie Consent
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -10,7 +11,8 @@ import HomePage from "./components/home";
 import ContactPage from "./components/contact";
 import ObsidianEventsPage from "./components/events";
 import ObsidianNewsletter from "./components/newsletter";
-
+import ObsidianCookieConsent from "./components/consent";
+import ObsidianPrivacyPolicy from "./components/privacypolicy";
 const FontLoader = () => {
   useEffect(() => {
     document.head.insertAdjacentHTML(
@@ -217,7 +219,7 @@ const ObsidianLoadingScreen = () => {
           >
             {/* Logo Image */}
             <img
-              src="/logo.png" // Replace with your actual logo path
+              src="/logo.png"
               alt="Obsidian Logo"
               className="w-24 h-24 object-contain relative z-10"
               style={{ 
@@ -225,7 +227,6 @@ const ObsidianLoadingScreen = () => {
                 animation: 'luxury-pulse 2s ease-in-out infinite'
               }}
               onError={(e) => {
-                // Fallback if logo doesn't load
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
@@ -327,7 +328,7 @@ const PageWrapper = ({ children }) => {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500); // Adjust timing as needed
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [location]);
@@ -361,7 +362,7 @@ const App = () => {
     // Initial app loading
     const timer = setTimeout(() => {
       setInitialLoad(false);
-    }, 2500); // Initial load time
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -382,9 +383,15 @@ const App = () => {
             <Route path="/newsletter" element={<ObsidianNewsletter />} />
             <Route path="/events" element={<ObsidianEventsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy-policy" element={<ObsidianPrivacyPolicy />} />
+            <Route path="/cookie-policy" element={<ObsidianPrivacyPolicy />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
           <Footer />
         </PageWrapper>
+        
+        {/* Add Obsidian Cookie Consent Banner - appears on all pages */}
+        <ObsidianCookieConsent />
       </div>
     </Router>
   );

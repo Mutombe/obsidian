@@ -146,6 +146,16 @@ const Footer = () => {
                   label: "Personal Concierge",
                   desc: "Bespoke service",
                 },
+                                {
+                  to: "/privacy-policy",
+                  label: "Privacy Policy",
+                  desc: "Terms and Conditions",
+                },
+                                {
+                  to: "/cookie-policy",
+                  label: "Cookie Policy",
+                  desc: "Terms and Conditions",
+                },
               ].map((link, index) => (
                 <Link
                   key={index}

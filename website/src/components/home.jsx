@@ -20,23 +20,51 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { IntegratedNavigation } from "./header";
 import { useNavigate } from "react-router-dom";
-
+import { trackObsidianPageView, trackObsidianEvent, trackPackageView  } from "./cookieManager";
 
 const ObsidianHero = () => {
-    const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    trackObsidianPageView("/", "Obsidian - Elite VIP Experiences", {
+      section: "home",
+      userType: "visitor",
+    });
+  }, []);
+
+    const handleExplorePackages = () => {
+    trackObsidianEvent('explore_packages_click', {
+      button_location: 'hero_section',
+      page: 'home',
+      user_intent: 'package_discovery'
+    });
+    
+    // Your existing navigation logic
+    navigate("/newsletter");
+  };
+
+  const handleViewEvents = () => {
+    trackObsidianEvent('view_events_click', {
+      button_location: 'hero_section',
+      page: 'home',
+      user_intent: 'event_discovery'
+    });
+    
+    // Your existing navigation logic
+    navigate("/events");
+  };
+
   return (
     <section
       className="relative min-h-screen flex overflow-hidden"
       style={{ overflow: "hidden", marginTop: "0", paddingTop: "0" }}
+
     >
       {/* Integrated Navigation */}
       <IntegratedNavigation pageType="transparent" />
 
       {/* Split Background */}
-      <div
-        className="absolute inset-0 flex"
-      >
+      <div className="absolute inset-0 flex">
         {/* Left Half - Black & Gold */}
         <div className="w-1/2 bg-black relative">
           <div className="absolute inset-0 opacity-20">
@@ -82,8 +110,10 @@ const ObsidianHero = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 sm:mb-16">
-                  <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105"
-                  onClick={() => navigate("/newsletter")}>
+                  <button
+                    className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center justify-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105"
+                    onClick={handleExplorePackages}
+                  >
                     <span>Explore Packages</span>
                     <ArrowRight
                       size={18}
@@ -91,8 +121,10 @@ const ObsidianHero = () => {
                     />
                   </button>
 
-                  <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center justify-center space-x-3"
-                  onClick={() => navigate("/events")}>
+                  <button
+                    className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center justify-center space-x-3"
+                    onClick={handleViewEvents}
+                  >
                     <Calendar size={18} className="sm:w-5 sm:h-5" />
                     <span>View Events</span>
                   </button>
@@ -124,8 +156,10 @@ const ObsidianHero = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16">
-              <button className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 w-full sm:w-auto justify-center"
-              onClick={() => navigate("/newsletter")}>
+              <button
+                className="gravesend-sans group bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 flex items-center space-x-3 hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 w-full sm:w-auto justify-center"
+                onClick={() => navigate("/newsletter")}
+              >
                 <span>Explore Packages</span>
                 <ArrowRight
                   size={18}
@@ -133,8 +167,10 @@ const ObsidianHero = () => {
                 />
               </button>
 
-              <button className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3 w-full sm:w-auto justify-center"
-              onClick={() => navigate("/events")}>
+              <button
+                className="gravesend-sans group border-2 border-yellow-400 text-yellow-400 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-light transition-all duration-300 hover:bg-yellow-400/10 flex items-center space-x-3 w-full sm:w-auto justify-center"
+                onClick={() => navigate("/events")}
+              >
                 <Calendar size={18} className="sm:w-5 sm:h-5" />
                 <span>View Events</span>
               </button>
@@ -153,28 +189,32 @@ const Features = () => {
       description:
         "Transparent pricing with no surprises. What you see is what you pay. Our commitment to honest pricing means you can book with complete confidence.",
       number: "01",
-      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic5.jpg",
+      image:
+        "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic5.jpg",
     },
     {
       title: "Group Bookings",
       description:
         "All seats together, even for large group bookings. No one gets left behind. Experience seamless coordination for groups of any size.",
       number: "02",
-      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic16.jpg",
+      image:
+        "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic16.jpg",
     },
     {
       title: "Personalized Service",
       description:
         "Dedicated customer service tailored to your specific needs and preferences. Every interaction is crafted around your unique requirements.",
       number: "03",
-      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic19.jpg",
+      image:
+        "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic19.jpg",
     },
     {
       title: "Premium Guarantee",
       description:
         "Quality assurance on every booking with our comprehensive satisfaction guarantee. Your peace of mind is our top priority.",
       number: "04",
-      image: "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic0.jpg",
+      image:
+        "https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pic0.jpg",
     },
   ];
 
@@ -256,7 +296,6 @@ const Features = () => {
     </section>
   );
 };
-
 
 const HomePage = () => {
   return (

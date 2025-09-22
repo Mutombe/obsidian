@@ -229,9 +229,6 @@ const ContactPage = () => {
                       Email
                     </h3>
                     <p className="century-gothic text-gray-700 text-sm sm:text-base break-all">
-                      hello@obsidian.lifestyle.com
-                    </p>
-                    <p className="century-gothic text-gray-700 text-sm sm:text-base break-all">
                       info@obsidianlifestyle.com
                     </p>
                   </div>

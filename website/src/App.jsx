@@ -13,6 +13,8 @@ import ObsidianEventsPage from "./components/events";
 import ObsidianNewsletter from "./components/newsletter";
 import ObsidianCookieConsent from "./components/consent";
 import ObsidianPrivacyPolicy from "./components/privacypolicy";
+import ObsidianNewsletters from "./components/template";
+
 const FontLoader = () => {
   useEffect(() => {
     document.head.insertAdjacentHTML(
@@ -385,6 +387,8 @@ const App = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<ObsidianPrivacyPolicy />} />
             <Route path="/cookie-policy" element={<ObsidianPrivacyPolicy />} />
+            <Route path="/template" element={<ObsidianNewsletters />} />
+
             <Route path="*" element={<HomePage />} />
           </Routes>
           <Footer />

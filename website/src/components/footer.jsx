@@ -21,6 +21,7 @@ import {
   Check,
   Globe,
   Award,
+  FileText,
 } from "lucide-react";
 
 
@@ -55,7 +56,7 @@ const Footer = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Enhanced Brand Section */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-1">
             <div className="group flex items-center space-x-4 mb-6">
               <div>
                 <img
@@ -89,13 +90,8 @@ const Footer = () => {
                 },
                 {
                   icon: Mail,
-                  text: "hello@obsidian.lifestyle",
+                  text: "info@obsidianlifestyle.com",
                   label: "Premium Support",
-                },
-                {
-                  icon: Mail,
-                  text: "vip@obsidian.lifestyle",
-                  label: "VIP Services",
                 },
               ].map((contact, index) => (
                 <div
@@ -146,15 +142,48 @@ const Footer = () => {
                   label: "Personal Concierge",
                   desc: "Bespoke service",
                 },
-                                {
+              ].map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.to}
+                  className="group flex items-center justify-between p-3 hover:bg-yellow-400/5 transition-all duration-300"
+                >
+                  <div>
+                    <div className="century-gothic text-gray-300 group-hover:text-yellow-300 transition-colors font-medium">
+                      {link.label}
+                    </div>
+                    <div className="century-gothic text-xs text-gray-500">
+                      {link.desc}
+                    </div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all duration-300" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Legal & Compliance Section */}
+          <div className="space-y-6">
+            <h3 className="gravesend-sans text-xl font-semibold mb-6 text-yellow-400 flex items-center">
+              <FileText className="w-5 h-5 mr-2" />
+              Legal & Privacy
+            </h3>
+            <div className="space-y-3">
+              {[
+                {
                   to: "/privacy-policy",
                   label: "Privacy Policy",
-                  desc: "Terms and Conditions",
+                  desc: "Data protection",
                 },
-                                {
+                {
                   to: "/cookie-policy",
                   label: "Cookie Policy",
-                  desc: "Terms and Conditions",
+                  desc: "Cookie usage",
+                },
+                {
+                  to: "/terms-conditions",
+                  label: "Terms & Conditions",
+                  desc: "Service terms",
                 },
               ].map((link, index) => (
                 <Link

@@ -85,7 +85,7 @@ const Footer = () => {
               {[
                 {
                   icon: Phone,
-                  text: "+263 70 000 0000",
+                  text: "+263 861 2000 700",
                   label: "24/7 Concierge",
                 },
                 {

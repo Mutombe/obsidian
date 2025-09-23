@@ -53,7 +53,7 @@ const ObsidianEventsPage = () => {
         "The pinnacle of motorsport with unparalleled luxury and glamour at exclusive circuits.",
       features: [
         "Paddock Access",
-        "Yacht Hospitality",
+        "Exclusive Lounge Access",
         "Champagne Reception",
         "Grid Walk",
       ],
@@ -136,7 +136,7 @@ const ObsidianEventsPage = () => {
       features: [
         "Premium Seating",
         "Drinks Reception",
-        "Exclusive Merchandise",
+        "Meet & Greet",
         "VIP Bar Access",
       ],
       image: "/boxing.jpg",

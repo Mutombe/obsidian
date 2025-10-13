@@ -1,15 +1,21 @@
 import { StrictMode } from "react";
 import React from "react";
+import ReactDOM from 'react-dom/client';
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
-import store from "./redux/store/store.js";
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
+import { store } from './redux/store/store';
+import { injectStore } from './utils/api';
+import App from './App';
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+// Inject store into api after it's created
+injectStore(store);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </StrictMode>
+  </React.StrictMode>
 );

@@ -18,7 +18,7 @@ import {
   Bell,
   User
 } from "lucide-react";
-import { logoutAdmin,selectUser } from "../../redux/slices/authSlice";
+import { logoutAdmin, selectUser } from "../../redux/slices/authSlice";
 
 const AdminLayout = ({ children }) => {
   const dispatch = useDispatch();

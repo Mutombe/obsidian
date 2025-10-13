@@ -1,13 +1,19 @@
 import axios from 'axios';
-import { store } from '../store';
-import { refreshToken } from '../store/slices/authSlice';
+import { refreshToken } from '../redux/slices/authSlice';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Store reference (will be set after store is created)
+let store;
+
+export const injectStore = (_store) => {
+  store = _store;
+};
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
@@ -35,12 +41,14 @@ api.interceptors.response.use(
 
       try {
         // Attempt to refresh the token
-        await store.dispatch(refreshToken()).unwrap();
-        
-        // Retry the original request with new token
-        const token = localStorage.getItem('access_token');
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return api(originalRequest);
+        if (store) {
+          await store.dispatch(refreshToken()).unwrap();
+          
+          // Retry the original request with new token
+          const token = localStorage.getItem('access_token');
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return api(originalRequest);
+        }
       } catch (refreshError) {
         // Refresh failed, redirect to login
         window.location.href = '/admin/login';

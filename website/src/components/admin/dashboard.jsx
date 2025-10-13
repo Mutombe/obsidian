@@ -1,4 +1,4 @@
-/ components/Admin/AdminDashboard.jsx
+// components/Admin/AdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -32,14 +32,9 @@ import {
   BarChart3,
   Activity
 } from "lucide-react";
-import AdminLayout from "./AdminLayout";
-import {
-  fetchDashboardOverview,
-  fetchSubscriberAnalytics,
-  fetchNewsletterAnalytics,
-  fetchContentAnalytics,
-  selectAuth
-} from "../../store/slices/dashboardSlice";
+import AdminLayout from "./layout";
+import { fetchDashboardOverview, fetchSubscriberAnalytics, fetchNewsletterAnalytics, fetchContentAnalytics } from './../../redux/slices/dashboardSlice';
+import { selectAuth } from "../../redux/slices/authSlice";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();

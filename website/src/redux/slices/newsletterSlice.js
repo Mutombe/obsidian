@@ -1,6 +1,6 @@
 // src/store/slices/newsletterSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../api';
+import api from '../../utils/api';
 
 // Async thunks
 export const subscribeToNewsletter = createAsyncThunk(

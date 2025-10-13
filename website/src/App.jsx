@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Footer from "./components/footer";
 import HomePage from "./components/home";
 import ContactPage from "./components/contact";
@@ -20,7 +21,7 @@ import NewsletterManagement from "./components/admin/newsletterManagement";
 import AdminLogin from "./components/admin/auth";
 import AuthGuard from "./components/admin/authGuard";
 import { useDispatch } from 'react-redux';
-import { initializeAuth } from './store/slices/authSlice';
+import { initializeAuth } from "./redux/slices/authSlice";
 
 const FontLoader = () => {
   useEffect(() => {

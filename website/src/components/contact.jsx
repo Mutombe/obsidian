@@ -10,6 +10,7 @@ import {
   Award,
 } from "lucide-react";
 import { IntegratedNavigation } from "./header";
+import axios from "axios";
 
 const ContactForm = ({ eventTitle = "" }) => {
   const [formData, setFormData] = useState({
@@ -21,25 +22,55 @@ const ContactForm = ({ eventTitle = "" }) => {
     message: "",
     contactMethod: "email",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        event: eventTitle,
-        guests: "",
-        message: "",
-        contactMethod: "email",
-      });
-    }, 3000);
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${
+          process.env.REACT_APP_API_URL || "http://localhost:8000"
+        }/api/newsletter/contact/`,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          event: formData.event,
+          guests: formData.guests ? parseInt(formData.guests) : null,
+          message: formData.message,
+          contact_method: formData.contactMethod,
+        }
+      );
+
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          event: eventTitle,
+          guests: "",
+          message: "",
+          contactMethod: "email",
+        });
+      }, 5000);
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setError(
+        err.response?.data?.error ||
+          Object.values(err.response?.data || {}).flat()[0] ||
+          "Failed to submit. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -47,6 +78,7 @@ const ContactForm = ({ eventTitle = "" }) => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError(null);
   };
 
   return (
@@ -56,19 +88,27 @@ const ContactForm = ({ eventTitle = "" }) => {
       </h3>
 
       {isSubmitted ? (
-        <div className="text-center py-6 sm:py-8">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 flex items-center justify-center mx-auto mb-4">
-            <Check size={24} className="text-green-600 sm:w-8 sm:h-8" />
+        <div className="text-center py-8">
+          <div className="w-16 h-16 bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <Check size={32} className="text-green-600" />
           </div>
-          <h4 className="gravesend-sans text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+          <h4 className="gravesend-sans text-xl font-semibold text-gray-900 mb-2">
             Request Submitted!
           </h4>
-          <p className="century-gothic text-sm sm:text-base text-gray-600">
-            We'll contact you within 24 hours to discuss your booking.
+          <p className="century-gothic text-gray-600">
+            Check your email for confirmation. We'll contact you within 24
+            hours.
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 p-3 text-sm flex items-center gap-2">
+              <AlertCircle size={16} />
+              {error}
+            </div>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input
               type="text"
@@ -76,8 +116,9 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none"
               required
+              disabled={isSubmitting}
             />
             <input
               type="email"
@@ -85,8 +126,9 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none"
               required
+              disabled={isSubmitting}
             />
           </div>
 
@@ -97,8 +139,9 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none"
               required
+              disabled={isSubmitting}
             />
             <input
               type="number"
@@ -107,8 +150,8 @@ const ContactForm = ({ eventTitle = "" }) => {
               onChange={handleChange}
               placeholder="Number of Guests"
               min="1"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
-              required
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none"
+              disabled={isSubmitting}
             />
           </div>
 
@@ -119,7 +162,8 @@ const ContactForm = ({ eventTitle = "" }) => {
               value={formData.event}
               onChange={handleChange}
               placeholder="Event of Interest"
-              className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font text-sm sm:text-base"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none"
+              disabled={isSubmitting}
             />
           )}
 
@@ -129,14 +173,16 @@ const ContactForm = ({ eventTitle = "" }) => {
             onChange={handleChange}
             placeholder="Special Requirements or Questions"
             rows="4"
-            className="century-gothic w-full px-3 sm:px-4 py-3 bg-white border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors roboto-font resize-none text-sm sm:text-base"
+            className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none resize-none"
+            required
+            disabled={isSubmitting}
           ></textarea>
 
-          <div className="mb-4">
-            <p className="century-gothic text-gray-900 mb-2 text-sm sm:text-base font-medium">
+          <div>
+            <p className="text-gray-900 mb-2 font-medium">
               Preferred Contact Method:
             </p>
-            <div className="flex space-x-4 sm:space-x-6">
+            <div className="flex space-x-6">
               <label className="flex items-center space-x-2">
                 <input
                   type="radio"
@@ -144,11 +190,9 @@ const ContactForm = ({ eventTitle = "" }) => {
                   value="email"
                   checked={formData.contactMethod === "email"}
                   onChange={handleChange}
-                  className="text-yellow-500 focus:ring-yellow-500"
+                  disabled={isSubmitting}
                 />
-                <span className="century-gothic text-gray-700 text-sm sm:text-base">
-                  Email
-                </span>
+                <span className="text-gray-700">Email</span>
               </label>
               <label className="flex items-center space-x-2">
                 <input
@@ -157,22 +201,28 @@ const ContactForm = ({ eventTitle = "" }) => {
                   value="phone"
                   checked={formData.contactMethod === "phone"}
                   onChange={handleChange}
-                  className="century-gothic text-yellow-500 focus:ring-yellow-500"
+                  disabled={isSubmitting}
                 />
-                <span className="century-gothic text-gray-700 text-sm sm:text-base">
-                  Phone
-                </span>
+                <span className="text-gray-700">Phone</span>
               </label>
             </div>
           </div>
 
           <button
-            onClick={handleSubmit}
-            className="gravesend-sans w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 sm:py-4 font-semibold text-base sm:text-lg century-gothic transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-105"
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-4 font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            Submit Booking Request
+            {isSubmitting ? (
+              <>
+                <Loader2 size={20} className="animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              "Submit Booking Request"
+            )}
           </button>
-        </div>
+        </form>
       )}
     </div>
   );

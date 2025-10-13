@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import axios from "axios";
 import {
   ArrowRight,
   Calendar,
@@ -425,6 +426,70 @@ const BookingModal = ({ event, onClose }) => {
   const [number, setNumber] = useState("");
   const [favoriteEntity, setFavoriteEntity] = useState("");
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    eventDetails: "",
+    favoriteEntity: "",
+    numberOfGuests: 1,
+    specialRequirements: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleBooking = async () => {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.eventDetails
+    ) {
+      setError("Please fill in all required fields");
+      return;
+    }
+
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${
+          process.env.REACT_APP_API_URL || "http://localhost:8000"
+        }/api/newsletter/booking/`,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          event_title: event.title,
+          event_category: event.category.toLowerCase().replace(" ", ""),
+          event_details: formData.eventDetails,
+          favorite_entity: formData.favoriteEntity,
+          number_of_guests: parseInt(formData.numberOfGuests) || 1,
+          special_requirements: formData.specialRequirements,
+        }
+      );
+
+      // Close modal
+      onClose();
+
+      // Show success notification (using toast from sonner)
+      toast.success("Booking Request Submitted!", {
+        description: `Reference: ${response.data.booking_reference}. Check your email for confirmation. We'll contact you within 24 hours.`,
+        duration: 6000,
+      });
+    } catch (err) {
+      console.error("Booking error:", err);
+      setError(
+        err.response?.data?.error ||
+          Object.values(err.response?.data || {}).flat()[0] ||
+          "Failed to submit booking. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Get customized labels and placeholders based on event category
   const getCustomizedContent = () => {
     const configs = {
@@ -484,25 +549,6 @@ const BookingModal = ({ event, onClose }) => {
 
   const customContent = getCustomizedContent();
 
-  const handleBooking = () => {
-    if (eventDetails.trim() && name.trim() && email.trim() && number.trim()) {
-      // Close modal first
-      onClose();
-
-      // Show success notification
-      toast.success("Booking Request Submitted!", {
-        description: `We've received your request for ${event.title}. Our team will contact you within 24 hours to finalize your VIP experience.`,
-        duration: 5000,
-      });
-    } else {
-      toast.error("Please fill in all required fields", {
-        description:
-          "Name, email, phone number, and event details are required.",
-        duration: 4000,
-      });
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -550,6 +596,12 @@ const BookingModal = ({ event, onClose }) => {
 
         {/* Modal Content - Booking Form */}
         <div className="p-4 sm:p-6 lg:p-8">
+          {error && (
+            <div className="mb-4 bg-red-50 border border-red-200 text-red-700 p-3 text-sm flex items-center gap-2">
+              <AlertCircle size={16} />
+              {error}
+            </div>
+          )}
           <div className="mb-6 sm:mb-8">
             <h3 className="gravesend-sans text-lg sm:text-xl font-semibold text-black mb-3 sm:mb-4">
               Tell us about your desired event
@@ -662,13 +714,21 @@ const BookingModal = ({ event, onClose }) => {
                 Cancel
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={handleBooking}
-                className="gravesend-sans px-6 sm:px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold flex items-center justify-center gap-2 text-sm sm:text-base flex-1"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold py-3 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Reserve Your Experience
-                <ArrowRight size={16} />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={20} className="animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    Reserve Your Experience
+                    <ArrowRight size={16} />
+                  </>
+                )}
               </motion.button>
             </div>
           </div>

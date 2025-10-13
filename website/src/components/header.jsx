@@ -50,6 +50,7 @@ export const IntegratedNavigation = ({
      { path: "/events", label: "Events", icon: MdOutlineEventNote },
     { path: "/newsletter", label: "Newsletter", icon: BsEnvelopeAt },
     { path: "/contact", label: "Contact", icon: IoIosContact },
+    { path: "/template", label: "NL Template", icon: IoIosContact },
   ];
 
   // Get navigation background based on scroll and page type

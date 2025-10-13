@@ -14,6 +14,13 @@ import ObsidianNewsletter from "./components/newsletter";
 import ObsidianCookieConsent from "./components/consent";
 import ObsidianPrivacyPolicy from "./components/privacypolicy";
 import ObsidianNewsletters from "./components/template";
+import AdminDashboard from "./components/admin/dashboard";
+import SubscriberManagement from "./components/admin/SubscriberManagement";
+import NewsletterManagement from "./components/admin/newsletterManagement";
+import AdminLogin from "./components/admin/auth";
+import AuthGuard from "./components/admin/authGuard";
+import { useDispatch } from 'react-redux';
+import { initializeAuth } from './store/slices/authSlice';
 
 const FontLoader = () => {
   useEffect(() => {
@@ -189,21 +196,30 @@ const ObsidianLoadingScreen = () => {
       <div className="absolute inset-0">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
-        
+
         {/* Floating Gold Particles */}
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-yellow-400 to-yellow-600 rotate-45 blur-3xl opacity-20 floating-element"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-tl from-yellow-500 to-yellow-700 rotate-12 blur-2xl opacity-15 floating-element" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-2/3 left-1/6 w-16 h-16 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full blur-xl opacity-25 floating-element" style={{ animationDelay: '4s' }}></div>
-        
+        <div
+          className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-tl from-yellow-500 to-yellow-700 rotate-12 blur-2xl opacity-15 floating-element"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-2/3 left-1/6 w-16 h-16 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded-full blur-xl opacity-25 floating-element"
+          style={{ animationDelay: "4s" }}
+        ></div>
+
         {/* Sweeping Gold Lines */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-          <div 
+          <div
             className="absolute top-1/3 -left-20 w-80 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-30"
-            style={{ animation: 'gold-sweep 3s ease-in-out infinite' }}
+            style={{ animation: "gold-sweep 3s ease-in-out infinite" }}
           ></div>
-          <div 
+          <div
             className="absolute bottom-1/3 -left-20 w-60 h-0.5 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-20"
-            style={{ animation: 'gold-sweep 4s ease-in-out infinite', animationDelay: '1.5s' }}
+            style={{
+              animation: "gold-sweep 4s ease-in-out infinite",
+              animationDelay: "1.5s",
+            }}
           ></div>
         </div>
       </div>
@@ -212,11 +228,12 @@ const ObsidianLoadingScreen = () => {
       <div className="relative z-10 text-center">
         {/* Logo Container */}
         <div className="relative mb-12">
-          <div 
+          <div
             className="w-40 h-40 mx-auto rounded-full flex items-center justify-center relative overflow-hidden backdrop-blur-sm border border-yellow-400/30"
-            style={{ 
-              background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%)',
-              animation: 'obsidian-glow 3s ease-in-out infinite'
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%)",
+              animation: "obsidian-glow 3s ease-in-out infinite",
             }}
           >
             {/* Logo Image */}
@@ -224,20 +241,20 @@ const ObsidianLoadingScreen = () => {
               src="/logo.png"
               alt="Obsidian Logo"
               className="w-24 h-24 object-contain relative z-10"
-              style={{ 
-                filter: 'brightness(1.2) contrast(1.1)',
-                animation: 'luxury-pulse 2s ease-in-out infinite'
+              style={{
+                filter: "brightness(1.2) contrast(1.1)",
+                animation: "luxury-pulse 2s ease-in-out infinite",
               }}
               onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
+                e.target.style.display = "none";
+                e.target.nextSibling.style.display = "block";
               }}
             />
-            
+
             {/* Fallback logo if image fails to load */}
-            <div 
+            <div
               className="w-full h-full items-center justify-center flex-col space-y-2"
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
             >
               <div className="gravesend-sans text-4xl font-light bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
                 O
@@ -246,24 +263,24 @@ const ObsidianLoadingScreen = () => {
                 OBSIDIAN
               </div>
             </div>
-            
+
             {/* Rotating Ring */}
             <div className="absolute inset-0 rounded-full">
-              <div 
+              <div
                 className="w-full h-full rounded-full border-2 opacity-50"
-                style={{ 
-                  borderColor: 'transparent',
-                  borderTopColor: '#fbbf24',
-                  borderRightColor: '#f59e0b',
-                  animation: 'spin 3s linear infinite'
+                style={{
+                  borderColor: "transparent",
+                  borderTopColor: "#fbbf24",
+                  borderRightColor: "#f59e0b",
+                  animation: "spin 3s linear infinite",
                 }}
               />
             </div>
-            
+
             {/* Inner Glow */}
-            <div 
+            <div
               className="absolute inset-2 rounded-full bg-gradient-to-br from-yellow-400/20 to-transparent"
-              style={{ animation: 'loading-fade 2s ease-in-out infinite' }}
+              style={{ animation: "loading-fade 2s ease-in-out infinite" }}
             ></div>
           </div>
         </div>
@@ -273,7 +290,7 @@ const ObsidianLoadingScreen = () => {
           <h1 className="gravesend-sans text-4xl lg:text-5xl font-light text-white tracking-wide">
             OBSIDIAN
           </h1>
-          
+
           <div className="space-y-2">
             <p className="century-gothic text-lg text-yellow-400/90 tracking-widest font-light">
               ELITE ACCESS
@@ -293,21 +310,21 @@ const ObsidianLoadingScreen = () => {
               <div
                 key={index}
                 className="w-3 h-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600"
-                style={{ 
-                  animation: `loading-fade 1.8s ease-in-out ${delay}s infinite`
+                style={{
+                  animation: `loading-fade 1.8s ease-in-out ${delay}s infinite`,
                 }}
               />
             ))}
           </div>
-          
+
           {/* Loading Bar */}
           <div className="w-80 max-w-sm mx-auto">
             <div className="h-0.5 bg-gray-800 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full"
-                style={{ 
-                  width: '100%',
-                  animation: 'gold-sweep 2.5s ease-in-out infinite'
+                style={{
+                  width: "100%",
+                  animation: "gold-sweep 2.5s ease-in-out infinite",
                 }}
               />
             </div>
@@ -339,11 +356,7 @@ const PageWrapper = ({ children }) => {
     return <ObsidianLoadingScreen />;
   }
 
-  return (
-    <div className="page-transition">
-      {children}
-    </div>
-  );
+  return <div className="page-transition">{children}</div>;
 };
 
 const ScrollToTop = () => {
@@ -359,6 +372,12 @@ const ScrollToTop = () => {
 // Main App Component
 const App = () => {
   const [initialLoad, setInitialLoad] = useState(true);
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Initialize auth from localStorage on app load
+    dispatch(initializeAuth());
+  }, [dispatch]);
 
   useEffect(() => {
     // Initial app loading
@@ -378,7 +397,7 @@ const App = () => {
       <div className="min-h-screen bg-black text-white">
         <FontLoader />
         <ScrollToTop />
-        
+
         <PageWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -389,11 +408,46 @@ const App = () => {
             <Route path="/cookie-policy" element={<ObsidianPrivacyPolicy />} />
             <Route path="/template" element={<ObsidianNewsletters />} />
 
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+            {/* Protected Admin Routes */}
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AuthGuard>
+                  <AdminDashboard />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/admin/subscribers"
+              element={
+                <AuthGuard>
+                  <SubscriberManagement />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/admin/newsletters"
+              element={
+                <AuthGuard>
+                  <NewsletterManagement />
+                </AuthGuard>
+              }
+            />
+
+            {/* Redirect /admin to dashboard */}
+            <Route
+              path="/admin"
+              element={<Navigate to="/admin/dashboard" replace />}
+            />
+
             <Route path="*" element={<HomePage />} />
           </Routes>
           <Footer />
         </PageWrapper>
-        
+
         {/* Add Obsidian Cookie Consent Banner - appears on all pages */}
         <ObsidianCookieConsent />
       </div>

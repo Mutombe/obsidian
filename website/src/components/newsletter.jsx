@@ -25,24 +25,52 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { IntegratedNavigation } from "./header";
+import axios from "axios";
+
 
 const ObsidianNewsletter = () => {
   const [formData, setFormData] = useState({ name: "", email: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubscribed(true);
-    setTimeout(() => {
-      setIsSubscribed(false);
-      setFormData({ name: "", email: "" });
-    }, 4000);
+    setError(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${
+          process.env.REACT_APP_API_URL || "http://localhost:8000"
+        }/api/newsletter/subscribe/`,
+        formData
+      );
+
+      setIsSubscribed(true);
+
+      // Reset after 5 seconds
+      setTimeout(() => {
+        setIsSubscribed(false);
+        setFormData({ name: "", email: "" });
+      }, 5000);
+    } catch (err) {
+      console.error("Subscription error:", err);
+      setError(
+        err.response?.data?.email?.[0] ||
+          err.response?.data?.error ||
+          "Failed to subscribe. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    setError(null); // Clear error when user types
   };
 
   return (
@@ -78,7 +106,7 @@ const ObsidianNewsletter = () => {
                 transition={{ delay: 0.3 }}
                 className="gravesend-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight"
               >
-                Experience  
+                Experience
                 <span className="block bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent font-normal">
                   Elite Sporting Hospitality
                 </span>
@@ -104,44 +132,60 @@ const ObsidianNewsletter = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: 0.8 }}
                   onSubmit={handleSubmit}
                   className="space-y-4"
                 >
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <div className="relative flex-1">
-                      <input
-                        type="text"
-                        value={formData.name}
-                        onChange={(e) =>
-                          handleInputChange("name", e.target.value)
-                        }
-                        placeholder="Enter your Name"
-                        className="century-gothic w-full px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20 text-sm sm:text-base"
-                        required
-                      />
-                    </div>
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-red-500/10 border border-red-500/30 text-red-300 p-3 flex items-center gap-2"
+                    >
+                      <AlertCircle size={16} />
+                      <span className="text-sm">{error}</span>
+                    </motion.div>
+                  )}
 
-                    <div className="relative flex-1">
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          handleInputChange("email", e.target.value)
-                        }
-                        placeholder="Enter email"
-                        className="century-gothic w-full px-3 sm:px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors duration-300 focus:bg-white/20 text-sm sm:text-base"
-                        required
-                      />
-                    </div>
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) =>
+                        handleInputChange("name", e.target.value)
+                      }
+                      placeholder="Enter your Name"
+                      className="century-gothic w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors"
+                      required
+                      disabled={isSubmitting}
+                    />
+
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      placeholder="Enter email"
+                      className="century-gothic w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-yellow-400 transition-colors"
+                      required
+                      disabled={isSubmitting}
+                    />
 
                     <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                      whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                       type="submit"
-                      className="century-gothic bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-6 sm:px-8 py-3 font-medium tracking-wider hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 text-sm sm:text-base"
+                      disabled={isSubmitting}
+                      className="century-gothic bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black px-8 py-3 font-medium tracking-wider hover:shadow-lg hover:shadow-yellow-500/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                      SUBSCRIBE
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={20} className="animate-spin" />
+                          SUBSCRIBING...
+                        </>
+                      ) : (
+                        "SUBSCRIBE"
+                      )}
                     </motion.button>
                   </div>
                 </motion.form>
@@ -151,21 +195,22 @@ const ObsidianNewsletter = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="text-center py-6 sm:py-8 bg-black/50 backdrop-blur-sm border border-yellow-400/30"
+                  className="text-center py-8 bg-black/50 backdrop-blur-sm border border-yellow-400/30"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-3 sm:mb-4"
+                    className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-4"
                   >
-                    <Check size={24} className="text-black sm:w-8 sm:h-8" />
+                    <Check size={32} className="text-black" />
                   </motion.div>
-                  <h3 className="gravesend-sans text-xl sm:text-2xl font-light text-white mb-2">
+                  <h3 className="gravesend-sans text-2xl font-light text-white mb-2">
                     Welcome to Elite Access!
                   </h3>
-                  <p className="century-gothic text-gray-300 text-sm sm:text-base px-4">
-                    You're now part of the Obsidian Lifestyle community
+                  <p className="century-gothic text-gray-300 px-4">
+                    Check your email for a welcome message with exclusive
+                    content!
                   </p>
                 </motion.div>
               )}
@@ -190,8 +235,13 @@ const ObsidianNewsletter = () => {
                   transition={{ delay: 1.4 + index * 0.1 }}
                   className="flex items-center gap-3 text-gray-300 bg-black/30 backdrop-blur-sm p-3 sm:p-3 border border-white/10"
                 >
-                  <benefit.icon size={16} className="text-yellow-400 sm:w-5 sm:h-5 flex-shrink-0" />
-                  <span className="century-gothic text-xs sm:text-sm font-light">{benefit.text}</span>
+                  <benefit.icon
+                    size={16}
+                    className="text-yellow-400 sm:w-5 sm:h-5 flex-shrink-0"
+                  />
+                  <span className="century-gothic text-xs sm:text-sm font-light">
+                    {benefit.text}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -203,7 +253,7 @@ const ObsidianNewsletter = () => {
               transition={{ delay: 1.8 }}
               className="flex items-center gap-3 sm:gap-4 pt-3 sm:pt-4"
             >
-              <button 
+              <button
                 className="century-gothic group flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-xs sm:text-sm"
                 onClick={() => navigate("/events")}
               >

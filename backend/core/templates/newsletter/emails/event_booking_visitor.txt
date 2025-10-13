@@ -1,0 +1,51 @@
+<!-- newsletter/templates/newsletter/emails/event_booking_visitor.txt -->
+OBSIDIAN LIFESTYLE - ELITE SPORTS EXPERIENCES
+═══════════════════════════════════════
+
+Booking Request Received!
+
+Dear {{ booking.name }},
+
+Thank you for your interest in experiencing elite sports hospitality with Obsidian Lifestyle. We have received your booking request and our VIP events team is reviewing your inquiry.
+
+BOOKING DETAILS:
+────────────────────
+Event: {{ booking.event_title }}
+Package: {{ booking.package_type }}
+Guests: {{ booking.number_of_guests }}
+Reference: {{ booking.id|upper }}
+{% if booking.special_requests %}
+Special Requests: {{ booking.special_requests }}
+{% endif %}
+
+WHAT HAPPENS NEXT:
+────────────────────
+
+🔍 Availability Check
+   We're confirming availability for your chosen package
+
+💰 Quote Preparation
+   Your personalized quote is being prepared
+
+📞 Personal Contact
+   Our VIP team will contact you within 24 hours
+
+✅ Confirmation
+   Finalize your booking and payment details
+
+⚠️ IMPORTANT NOTICE:
+This is a booking request and not a confirmed reservation. Your booking will be confirmed once we verify availability and receive payment. Premium packages for major events sell out quickly - our team will prioritize your request.
+
+EXPLORE MORE EVENTS
+Visit: {{ site_url }}/events
+
+QUESTIONS ABOUT YOUR BOOKING?
+Email: bookings@obsidianlifestyle.com
+Phone: +263 77 123 4567
+Reference: {{ booking.id|upper }}
+
+═══════════════════════════════════════
+© {{ current_year }} Obsidian Lifestyle
+A product of Bard Santner Markets
+
+Visit Our Website: {{ site_url }}

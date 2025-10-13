@@ -1,0 +1,40 @@
+<!-- newsletter/templates/newsletter/emails/contact_form_visitor.txt -->
+OBSIDIAN LIFESTYLE - ELITE SPORTS EXPERIENCES
+═══════════════════════════════════════
+
+Message Received
+
+Dear {{ contact.name }},
+
+Thank you for reaching out to Obsidian Lifestyle. We have received your message and one of our elite sports consultants will respond to you within 24-48 hours.
+
+YOUR MESSAGE:
+────────────────────
+Subject: {{ contact.subject }}
+
+{{ contact.message }}
+
+WHAT HAPPENS NEXT:
+────────────────────
+
+📋 Review
+   Our team is reviewing your inquiry
+
+💼 Assignment
+   A dedicated consultant will be assigned
+
+📞 Response
+   We'll contact you within 24-48 hours
+
+EXPLORE UPCOMING EVENTS
+Visit: {{ site_url }}/events
+
+NEED URGENT ASSISTANCE?
+Email: info@obsidianlifestyle.com
+Phone: +263 77 123 4567
+
+═══════════════════════════════════════
+© {{ current_year }} Obsidian Lifestyle
+A product of Bard Santner Markets
+
+Visit Our Website: {{ site_url }}

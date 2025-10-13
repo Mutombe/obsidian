@@ -1,0 +1,35 @@
+OBSIDIAN LIFESTYLE - ELITE SPORTS DIGEST
+═══════════════════════════════════════
+
+Welcome to Elite Access!
+
+Dear {{ subscriber.name }},
+
+Thank you for subscribing to the Obsidian Lifestyle Elite Sports Digest. You're now part of an exclusive community that enjoys priority access to the world's most prestigious sporting events.
+
+WHAT YOU'LL RECEIVE:
+────────────────────
+
+🏆 Exclusive Event Alerts
+   Be the first to know about premium VIP packages
+
+🌐 Private Hospitality Offers
+   Access to invitation-only experiences
+
+⚽ Weekly Sports News
+   Curated updates on Soccer, F1, Rugby, Tennis & more
+
+📅 Upcoming Fixtures
+   Never miss an important match or event
+
+EXPLORE UPCOMING EVENTS
+Visit: {{ site_url }}/events
+
+MANAGE YOUR PREFERENCES
+Visit: {{ preferences_url }}
+
+═══════════════════════════════════════
+© {{ current_year }} Obsidian Lifestyle
+A product of Bard Santner Markets
+
+Unsubscribe: {{ unsubscribe_url }}

@@ -1,0 +1,135 @@
+<!-- newsletter/templates/newsletter/emails/event_booking_admin.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Event Booking Request</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
+    <table width="600" style="background-color: #ffffff; margin: 0 auto; padding: 30px;">
+        <tr>
+            <td>
+                <h2 style="color: #000000; border-bottom: 3px solid #fbbf24; padding-bottom: 10px;">🎫 New Event Booking Request</h2>
+                
+                <div style="background-color: #fff9e6; padding: 15px; margin: 15px 0; border-left: 4px solid #fbbf24;">
+                    <p style="color: #000000; font-weight: bold; margin: 0; font-size: 16px;">
+                        ⚠️ Priority Request - Action Required Within 24 Hours
+                    </p>
+                </div>
+                
+                <p style="color: #666666; font-size: 16px; line-height: 1.6;">
+                    A new event booking request has been submitted. Please review and respond promptly.
+                </p>
+                
+                <!-- Customer Details -->
+                <h3 style="color: #000000; margin: 25px 0 10px 0; font-size: 18px;">Customer Information</h3>
+                <table style="width: 100%; margin: 10px 0; background-color: #f8f9fa; padding: 20px;">
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Name:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Email:</td>
+                        <td style="padding: 5px; color: #666666;">
+                            <a href="mailto:{{ booking.email }}" style="color: #fbbf24; text-decoration: none;">{{ booking.email }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Phone:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Company:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.company|default:"Not provided" }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Submitted:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.created_at|date:"F d, Y H:i" }}</td>
+                    </tr>
+                </table>
+                
+                <!-- Booking Details -->
+                <h3 style="color: #000000; margin: 25px 0 10px 0; font-size: 18px;">Booking Details</h3>
+                <table style="width: 100%; margin: 10px 0; background-color: #f8f9fa; padding: 20px;">
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Event:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.event_title }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Package Type:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.package_type }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Number of Guests:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.number_of_guests }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Preferred Date:</td>
+                        <td style="padding: 5px; color: #666666;">{{ booking.preferred_date|default:"Not specified" }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold; color: #000000;">Booking Reference:</td>
+                        <td style="padding: 5px; color: #fbbf24; font-weight: bold;">{{ booking.id|upper }}</td>
+                    </tr>
+                </table>
+                
+                {% if booking.special_requests %}
+                <div style="background-color: #fff9e6; padding: 20px; border-left: 4px solid #fbbf24; margin: 20px 0;">
+                    <h3 style="color: #000000; margin: 0 0 10px 0; font-size: 16px;">Special Requests:</h3>
+                    <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{ booking.special_requests }}</p>
+                </div>
+                {% endif %}
+                
+                <!-- Action Buttons -->
+                <div style="margin: 30px 0;">
+                    <h3 style="color: #000000; margin: 0 0 15px 0; font-size: 18px;">Required Actions:</h3>
+                    
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="padding: 5px 5px 5px 0;">
+                                <a href="{{ site_url }}/admin/newsletter/eventbooking/{{ booking.id }}/change/" style="background-color: #fbbf24; color: #000000; padding: 12px 20px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 14px;">
+                                    📋 View in Admin Panel
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 5px 5px 0;">
+                                <a href="mailto:{{ booking.email }}?subject=Re: Event Booking - {{ booking.event_title }} (Ref: {{ booking.id|upper }})" style="background-color: #1a1a1a; color: #ffffff; padding: 12px 20px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 14px;">
+                                    📧 Email {{ booking.name }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 5px 5px 0;">
+                                <a href="tel:{{ booking.phone }}" style="background-color: #28a745; color: #ffffff; padding: 12px 20px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 14px;">
+                                    📞 Call {{ booking.phone }}
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Action Checklist -->
+                <div style="background-color: #f8f9fa; padding: 20px; margin: 20px 0;">
+                    <h4 style="color: #000000; margin: 0 0 10px 0; font-size: 16px;">Processing Checklist:</h4>
+                    <ul style="color: #666666; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 20px;">
+                        <li>Verify package availability for requested dates</li>
+                        <li>Check current pricing and any applicable discounts</li>
+                        <li>Review special requests for feasibility</li>
+                        <li>Prepare personalized quote</li>
+                        <li>Contact customer within 24 hours</li>
+                        <li>Update booking status in admin panel</li>
+                    </ul>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
+                
+                <p style="color: #999999; font-size: 12px;">
+                    This is an automated notification from Obsidian Lifestyle Booking System.<br>
+                    <strong style="color: #d9534f;">⚠️ HIGH PRIORITY:</strong> Customer expects response within 24 hours.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Request Received - Obsidian Lifestyle</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Century Gothic', Arial, sans-serif; background-color: #f5f5f5;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; max-width: 600px;">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 40px; text-align: center;">
+                            <img src="https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/logo4.png" alt="Obsidian Lifestyle" style="width: 150px; margin-bottom: 20px;">
+                            <h1 style="color: #ffffff; font-size: 28px; margin: 0; font-weight: 300; letter-spacing: 3px;">OBSIDIAN LIFESTYLE</h1>
+                            <p style="color: #fbbf24; font-size: 14px; margin: 10px 0 0 0; letter-spacing: 2px;">ELITE SPORTS EXPERIENCES</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Confirmation Message -->
+                    <tr>
+                        <td style="padding: 40px 30px; text-align: center;">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                                <span style="font-size: 40px;">🎫</span>
+                            </div>
+                            
+                            <h2 style="color: #000000; font-size: 32px; margin: 0 0 20px 0; font-weight: 300;">Booking Request Received!</h2>
+                            
+                            <p style="color: #666666; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+                                Dear {{ booking.name }},
+                            </p>
+                            
+                            <p style="color: #666666; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+                                Thank you for your interest in experiencing elite sports hospitality with Obsidian Lifestyle. We have received your booking request and our VIP events team is reviewing your inquiry.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Booking Summary -->
+                    <tr>
+                        <td style="padding: 0 30px 40px 30px;">
+                            <h3 style="color: #000000; font-size: 20px; margin: 0 0 20px 0; text-align: center;">Booking Details</h3>
+                            
+                            <div style="background-color: #f8f9fa; padding: 25px; border-left: 4px solid #fbbf24;">
+                                <table width="100%" cellpadding="8" cellspacing="0">
+                                    <tr>
+                                        <td style="color: #000000; font-weight: bold; font-size: 14px;">Event:</td>
+                                        <td style="color: #666666; font-size: 14px;">{{ booking.event_title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #000000; font-weight: bold; font-size: 14px;">Package:</td>
+                                        <td style="color: #666666; font-size: 14px;">{{ booking.package_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #000000; font-weight: bold; font-size: 14px;">Guests:</td>
+                                        <td style="color: #666666; font-size: 14px;">{{ booking.number_of_guests }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #000000; font-weight: bold; font-size: 14px;">Reference:</td>
+                                        <td style="color: #fbbf24; font-size: 14px; font-weight: bold;">{{ booking.id|upper }}</td>
+                                    </tr>
+                                </table>
+                                
+                                {% if booking.special_requests %}
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+                                    <p style="color: #000000; font-weight: bold; font-size: 14px; margin: 0 0 5px 0;">Special Requests:</p>
+                                    <p style="color: #666666; font-size: 14px; margin: 0;">{{ booking.special_requests }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Next Steps -->
+                    <tr>
+                        <td style="padding: 0 30px 40px 30px;">
+                            <h3 style="color: #000000; font-size: 20px; margin: 0 0 20px 0; text-align: center;">What Happens Next?</h3>
+                            
+                            <table width="100%" cellpadding="10" cellspacing="0">
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-left: 4px solid #fbbf24; margin-bottom: 10px;">
+                                        <strong style="color: #000000; font-size: 16px;">🔍 Availability Check</strong><br>
+                                        <span style="color: #666666; font-size: 14px;">We're confirming availability for your chosen package</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-left: 4px solid #fbbf24;">
+                                        <strong style="color: #000000; font-size: 16px;">💰 Quote Preparation</strong><br>
+                                        <span style="color: #666666; font-size: 14px;">Your personalized quote is being prepared</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-left: 4px solid #fbbf24;">
+                                        <strong style="color: #000000; font-size: 16px;">📞 Personal Contact</strong><br>
+                                        <span style="color: #666666; font-size: 14px;">Our VIP team will contact you within 24 hours</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px; background-color: #f8f9fa; border-left: 4px solid #fbbf24;">
+                                        <strong style="color: #000000; font-size: 16px;">✅ Confirmation</strong><br>
+                                        <span style="color: #666666; font-size: 14px;">Finalize your booking and payment details</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Important Notice -->
+                    <tr>
+                        <td style="padding: 0 30px 40px 30px;">
+                            <div style="background-color: #fff9e6; padding: 20px; border-left: 4px solid #fbbf24;">
+                                <h4 style="color: #000000; margin: 0 0 10px 0; font-size: 16px;">⚠️ Important Notice</h4>
+                                <p style="color: #666666; font-size: 14px; line-height: 1.6; margin: 0;">
+                                    This is a booking request and not a confirmed reservation. Your booking will be confirmed once we verify availability and receive payment. Premium packages for major events sell out quickly - our team will prioritize your request.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- CTA Button -->
+                    <tr>
+                        <td style="padding: 0 30px 40px 30px; text-align: center;">
+                            <p style="color: #666666; font-size: 14px; margin: 0 0 20px 0;">
+                                Explore more elite sports experiences
+                            </p>
+                            <a href="{{ site_url }}/events" style="display: inline-block; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: #000000; padding: 15px 40px; text-decoration: none; font-weight: 600; font-size: 16px; letter-spacing: 1px;">
+                                VIEW ALL EVENTS
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contact Info -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #f8f9fa; border-top: 2px solid #fbbf24; text-align: center;">
+                            <p style="color: #666666; font-size: 14px; margin: 0 0 10px 0;">
+                                <strong>Questions about your booking?</strong>
+                            </p>
+                            <p style="color: #666666; font-size: 14px; margin: 0;">
+                                Email: bookings@obsidianlifestyle.com<br>
+                                Phone: +263 77 123 4567<br>
+                                Reference: <strong style="color: #fbbf24;">{{ booking.id|upper }}</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #1a1a1a; text-align: center;">
+                            <p style="color: #999999; font-size: 12px; margin: 0 0 10px 0;">
+                                © {{ current_year }} Obsidian Lifestyle. All rights reserved.<br>
+                                A product of Bard Santner Markets
+                            </p>
+                            <p style="color: #666666; font-size: 11px; margin: 10px 0 0 0;">
+                                <a href="{{ site_url }}" style="color: #999999; text-decoration: none;">Visit Our Website</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

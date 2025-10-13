@@ -1,0 +1,52 @@
+<!-- newsletter/templates/newsletter/emails/event_booking_admin.txt -->
+═══════════════════════════════════════
+NEW EVENT BOOKING REQUEST
+═══════════════════════════════════════
+
+⚠️ PRIORITY REQUEST - ACTION REQUIRED WITHIN 24 HOURS
+
+A new event booking request has been submitted. Please review and respond promptly.
+
+CUSTOMER INFORMATION:
+Name: {{ booking.name }}
+Email: {{ booking.email }}
+Phone: {{ booking.phone }}
+Company: {{ booking.company|default:"Not provided" }}
+Submitted: {{ booking.created_at|date:"F d, Y H:i" }}
+
+BOOKING DETAILS:
+Event: {{ booking.event_title }}
+Package Type: {{ booking.package_type }}
+Number of Guests: {{ booking.number_of_guests }}
+Preferred Date: {{ booking.preferred_date|default:"Not specified" }}
+Booking Reference: {{ booking.id|upper }}
+{% if booking.special_requests %}
+
+SPECIAL REQUESTS:
+────────────────────
+{{ booking.special_requests }}
+{% endif %}
+
+REQUIRED ACTIONS:
+────────────────────
+View in Admin Panel:
+{{ site_url }}/admin/newsletter/eventbooking/{{ booking.id }}/change/
+
+Email {{ booking.name }}:
+mailto:{{ booking.email }}?subject=Re: Event Booking - {{ booking.event_title }} (Ref: {{ booking.id|upper }})
+
+Call: {{ booking.phone }}
+
+PROCESSING CHECKLIST:
+□ Verify package availability for requested dates
+□ Check current pricing and any applicable discounts
+□ Review special requests for feasibility
+□ Prepare personalized quote
+□ Contact customer within 24 hours
+□ Update booking status in admin panel
+
+═══════════════════════════════════════
+Obsidian Lifestyle Booking System
+Automated Notification
+
+⚠️ HIGH PRIORITY: Customer expects response within 24 hours.

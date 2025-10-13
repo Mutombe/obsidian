@@ -1,0 +1,22 @@
+<!-- newsletter/templates/newsletter/emails/newsletter_welcome_admin.txt -->
+═══════════════════════════════════════
+NEW NEWSLETTER SUBSCRIPTION
+═══════════════════════════════════════
+
+A new user has subscribed to the Obsidian Lifestyle newsletter.
+
+SUBSCRIBER DETAILS:
+Name: {{ subscriber.name }}
+Email: {{ subscriber.email }}
+Subscribed: {{ subscriber.subscription_date|date:"F d, Y H:i" }}
+Status: {{ subscriber.status|upper }}
+{% if subscriber.preferences.sports %}
+Sports Interests: {{ subscriber.preferences.sports|join:", " }}
+{% endif %}
+
+View in Admin Panel:
+{{ site_url }}/admin/newsletter/newslettersubscriber/{{ subscriber.id }}/change/
+
+═══════════════════════════════════════
+Obsidian Lifestyle Newsletter System
+Automated Notification

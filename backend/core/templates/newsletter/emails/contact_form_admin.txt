@@ -1,0 +1,30 @@
+<!-- newsletter/templates/newsletter/emails/contact_form_admin.txt -->
+═══════════════════════════════════════
+NEW CONTACT FORM SUBMISSION
+═══════════════════════════════════════
+
+A visitor has submitted a message through the contact form.
+
+CONTACT DETAILS:
+Name: {{ contact.name }}
+Email: {{ contact.email }}
+Phone: {{ contact.phone|default:"Not provided" }}
+Subject: {{ contact.subject }}
+Submitted: {{ contact.created_at|date:"F d, Y H:i" }}
+
+MESSAGE:
+────────────────────
+{{ contact.message }}
+
+ACTIONS:
+View in Admin Panel:
+{{ site_url }}/admin/newsletter/contactmessage/{{ contact.id }}/change/
+
+Reply to {{ contact.name }}:
+mailto:{{ contact.email }}?subject=Re: {{ contact.subject }}
+
+═══════════════════════════════════════
+Obsidian Lifestyle Contact System
+Automated Notification
+
+⚠️ ACTION REQUIRED: Please respond within 24-48 hours.

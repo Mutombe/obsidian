@@ -16,7 +16,7 @@ import ObsidianCookieConsent from "./components/consent";
 import ObsidianPrivacyPolicy from "./components/privacypolicy";
 import ObsidianNewsletters from "./components/template";
 import AdminDashboard from "./components/admin/dashboard";
-import SubscriberManagement from "./components/admin/SubscriberManagement";
+import SubscriberManagement from "@/components/admin/SubscriberManagement.jsx";
 import NewsletterManagement from "./components/admin/newsletterManagement";
 import AdminLogin from "./components/admin/auth";
 import AuthGuard from "./components/admin/authGuard";

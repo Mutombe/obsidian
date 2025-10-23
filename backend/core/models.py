@@ -221,12 +221,13 @@ class NewsArticle(models.Model):
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=800)
     content = models.TextField()
     summary = models.TextField(max_length=500)
     sport_category = models.ForeignKey(SportCategory, on_delete=models.CASCADE)
     article_type = models.CharField(max_length=20, choices=ARTICLE_TYPES, default='news')
     source_url = models.URLField(blank=True)
+    link_url = models.URLField(blank=True, null=True)
     source_name = models.CharField(max_length=100, blank=True)
     image_url = models.URLField(blank=True)
     publish_date = models.DateTimeField()
@@ -280,6 +281,8 @@ class Newsletter(models.Model):
     sent_at = models.DateTimeField(null=True, blank=True)
     total_subscribers = models.IntegerField(default=0)
     template_data = models.JSONField(default=dict, blank=True)  # Store template customization
+    template_used = models.CharField(max_length=100, blank=True, default='default')
+    metadata = models.JSONField(default=dict, blank=True)
     
     class Meta:
         ordering = ['-edition_date']
@@ -308,7 +311,6 @@ class NewsletterDelivery(models.Model):
 
     def track_click(self, url, ip_address=None, user_agent=None):
         """Track a click on a link"""
-        from .analytics_models import EmailClickTracking
        
         click = EmailClickTracking.objects.create(
             delivery=self,

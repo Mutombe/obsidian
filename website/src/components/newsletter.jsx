@@ -15,6 +15,7 @@ import {
   Globe,
   Users,
   ChevronDown,
+  Loader2 ,
   Menu,
   X,
   Calendar,
@@ -44,7 +45,7 @@ const ObsidianNewsletter = () => {
     try {
       const response = await axios.post(
         `${
-          process.env.REACT_APP_API_URL || "http://localhost:8000"
+          "http://localhost:8000"
         }/api/newsletter/subscribe/`,
         formData
       );

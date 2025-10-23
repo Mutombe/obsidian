@@ -53,7 +53,7 @@ const AdminLayout = ({ children }) => {
         onClick={() => setSidebarOpen(false)}
       >
         <item.icon
-          className={`mr-3 h-5 w-5 transition-colors ${
+          className={`gravesend-sans mr-3 h-5 w-5 transition-colors ${
             isActive ? 'text-yellow-400' : 'text-gray-400 group-hover:text-white'
           }`}
         />

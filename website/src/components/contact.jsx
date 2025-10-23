@@ -8,6 +8,8 @@ import {
   Check,
   Globe,
   Award,
+  Loader2,
+  AlertCircle
 } from "lucide-react";
 import { IntegratedNavigation } from "./header";
 import axios from "axios";
@@ -34,7 +36,7 @@ const ContactForm = ({ eventTitle = "" }) => {
     try {
       const response = await axios.post(
         `${
-          process.env.REACT_APP_API_URL || "http://localhost:8000"
+           "http://127.0.0.1:8000"
         }/api/newsletter/contact/`,
         {
           name: formData.name,

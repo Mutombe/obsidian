@@ -7,7 +7,7 @@ from .settings import BASE_DIR
 ALLOWED_HOSTS = [
     os.environ.get('RENDER_EXTERNAL_HOSTNAME'),
     'houseofstone-backend.onrender.com',
-    'houseofstone.onrender.com',
+    'obsidian-obvg.onrender.com',
     'hsp.co.zw/'
 ]
 
@@ -17,18 +17,18 @@ SECRET_KEY = SECRET_KEY
 # CORS SETTINGS
 CORS_ALLOWED_ORIGINS = [
     'https://hsp.co.zw',
-    'https://houseofstone.onrender.com',
+    'https://obsidian-obvg.onrender.com',
     'https://houseofstone-backend.onrender.com',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173'
+    'http://localhost:5176',
+    'http://127.0.0.1:5176'
 ]
 
 CORS_TRUSTED_ORIGINS = [
     'https://hsp.co.zw',
-    'https://houseofstone.onrender.com',
+    'https://obsidian-obvg.onrender.com',
     'https://houseofstone-backend.onrender.com',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173'
+    'http://localhost:5176',
+    'http://127.0.0.1:5176'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -85,6 +85,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 # DATABASE CONFIGURATION
 DATABASES = {
     'default': {
@@ -94,13 +95,26 @@ DATABASES = {
         'PASSWORD': 'b8bed219fbf8eb3ecf6f97acf6621bb5a1f4c934',
         'HOST': '4jraem.h.filess.io',
         'PORT': '61008',
+        'CONN_MAX_AGE': 0,
         'OPTIONS': {
             'options': '-c search_path=django_schema,public',
             'connect_timeout': 5,
         },
-        'CONN_MAX_AGE': 300,
     }
 }
+
+NEWSLETTER_FROM_EMAIL = 'simbamtombe@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'simbamtombe@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'itzh jjkc hdmv csih'
+DEFAULT_FROM_EMAIL = 'noreply@hospital.com'
+ADMIN_EMAIL = 'simbamtombe@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+SITE_URL = os.environ.get('SITE_URL', 'https://obsidian.co.zw')
+
 
 # SECURITY MIDDLEWARE SETTINGS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -1,0 +1,26 @@
+INFO 2025-10-23 13:37:35,856 tasks Starting weekly newsletter generation task
+ERROR 2025-10-23 13:41:52,291 tasks Error in generate_weekly_newsletter_task: Newsletter() got unexpected keyword arguments: 'template_used', 'metadata'
+Traceback (most recent call last):
+  File "C:\Users\PC\Documents\obsidian\backend\core\tasks.py", line 82, in generate_weekly_newsletter_task
+    newsletter = generator.generate_weekly_newsletter(refresh_data=refresh_data)
+  File "C:\Users\PC\Documents\obsidian\backend\core\generator.py", line 209, in generate_weekly_newsletter
+    newsletter = Newsletter.objects.create(
+        title=f"{content['headline']} - {timezone.now().strftime('%B %d, %Y')}",
+    ...<14 lines>...
+        }
+    )
+  File "C:\Users\PC\Documents\obsidian\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\Documents\obsidian\.venv\Lib\site-packages\django\db\models\query.py", line 661, in create
+    obj = self.model(**kwargs)
+  File "C:\Users\PC\Documents\obsidian\.venv\Lib\site-packages\django\db\models\base.py", line 569, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: Newsletter() got unexpected keyword arguments: 'template_used', 'metadata'
+INFO 2025-10-23 13:54:27,525 tasks Starting weekly newsletter generation task
+INFO 2025-10-23 13:54:42,867 tasks Newsletter generated successfully: bffaab52-4d77-4904-af23-482829f0d64a, 20 articles, 0 fixtures
+INFO 2025-10-23 13:57:52,980 tasks Starting weekly newsletter generation task
+INFO 2025-10-23 13:58:06,732 tasks Newsletter generated successfully: f2805091-5bc4-4b9d-8bdf-9004583bba24, 20 articles, 0 fixtures
+INFO 2025-10-23 13:58:28,917 tasks Newsletter sent: 2 successful, 0 failed

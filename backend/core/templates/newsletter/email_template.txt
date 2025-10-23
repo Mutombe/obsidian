@@ -1,0 +1,59 @@
+OBSIDIAN LIFESTYLE
+Elite Sports Digest
+{{ newsletter.edition_date|date:"l, F d, Y"|upper }}
+================================================================================
+
+{% if featured_articles %}
+FEATURED THIS WEEK
+--------------------------------------------------------------------------------
+{% for article in featured_articles|slice:":1" %}
+{{ article.title }}
+{{ article.sport_category.display_name|upper }}
+
+{{ article.summary|truncatewords:50 }}
+
+Read more: {{ article.source_url }}
+
+{% endfor %}
+{% endif %}
+
+{% if premium_articles %}
+LATEST PREMIUM STORIES
+--------------------------------------------------------------------------------
+{% for article in premium_articles|slice:"1:5" %}
+• {{ article.title }}
+  {{ article.sport_category.display_name|upper }} | {{ article.publish_date|timesince }} ago
+  {{ article.source_url }}
+
+{% endfor %}
+{% endif %}
+
+{% if big_matches %}
+🏆 DON'T MISS THESE MATCHES
+--------------------------------------------------------------------------------
+{% for fixture in big_matches|slice:":4" %}
+{{ fixture.home_team }} vs {{ fixture.away_team }}
+{{ fixture.sport_category.display_name }} | {{ fixture.match_date|date:"l, F d" }} at {{ fixture.match_date|date:"H:i" }}
+{% if fixture.venue %}📍 {{ fixture.venue }}{% endif %}
+{% if fixture.league_competition %}🏅 {{ fixture.league_competition }}{% endif %}
+
+{% endfor %}
+{% endif %}
+
+================================================================================
+EXCLUSIVE VIP PACKAGES
+
+Experience the pinnacle of sporting luxury with our curated VIP hospitality 
+packages. Premier League • Formula 1 • Golf • Rugby
+
+Explore packages: https://obsidian.lifestyle/packages
+
+================================================================================
+MANAGE YOUR SUBSCRIPTION
+
+View online: {{ view_online_url }}
+Update preferences: {{ preferences_url }}
+Unsubscribe: {{ unsubscribe_url }}
+
+© {{ current_year }} Obsidian Lifestyle. All rights reserved.
+A product of Bard Santner Markets

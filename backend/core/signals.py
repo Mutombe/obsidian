@@ -43,6 +43,7 @@ def send_dual_email(subject_visitor, subject_admin, template_base, context, visi
         admin_msg.send()
         
         logger.info(f"Dual emails sent successfully to {visitor_email} and admin")
+        print(f"Dual emails sent successfully to {visitor_email} and admin")
         
     except Exception as e:
         logger.error(f"Error sending dual emails: {e}")

@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import (
     NewsletterSubscriber, SportCategory, NewsArticle, 
-    MatchFixture, Newsletter, NewsletterDelivery, NewsletterTemplate
+    MatchFixture, Newsletter, NewsletterDelivery, NewsletterTemplate, EventBooking, ContactMessage, CallbackRequest
 )
 
 @admin.register(NewsletterSubscriber)
@@ -120,6 +120,30 @@ class NewsletterTemplateAdmin(admin.ModelAdmin):
     list_filter = ['is_active', 'created_at']
     search_fields = ['name', 'description']
     readonly_fields = ['created_at', 'updated_at']
+
+@admin.register(EventBooking)
+class EventBookingAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'preferred_date', 'created_at']
+    list_filter = ['preferred_date', 'created_at']
+    search_fields = ['name', 'email', 'phone', 'event_details']
+    readonly_fields = ['created_at']
+    date_hierarchy = 'preferred_date'
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'message', 'created_at', 'status']
+    list_filter = ['created_at']
+    search_fields = ['name', 'email', 'message', 'message']
+    readonly_fields = ['created_at']
+    date_hierarchy = 'created_at'
+
+@admin.register(CallbackRequest)
+class CallbackRequestAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'preferred_time', 'created_at']
+    list_filter = ['preferred_time', 'created_at']
+    search_fields = ['name', 'phone']
+    readonly_fields = ['created_at']
+    date_hierarchy = 'created_at'
 
 # Customize admin site
 admin.site.site_header = "Obsidian Lifestyle Newsletter Admin"

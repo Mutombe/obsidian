@@ -16,14 +16,15 @@ import ObsidianCookieConsent from "./components/consent";
 import ObsidianPrivacyPolicy from "./components/privacypolicy";
 import ObsidianNewsletters from "./components/template";
 import AdminDashboard from "./components/admin/dashboard";
-//import SubscriberManagement from "@/components/admin/SubscriberManagement.jsx";
+import Analytics from "./components/admin/analytics";
+import Content from "./components/admin/content";
+import Settings from "./components/admin/settings";
+import SubscriberManagement from "./components/admin/SubscriberManagement";
 import NewsletterManagement from "./components/admin/newsletterManagement";
 import AdminLogin from "./components/admin/auth";
 import AuthGuard from "./components/admin/authGuard";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { initializeAuth } from "./redux/slices/authSlice";
-
-
 
 const FontLoader = () => {
   useEffect(() => {
@@ -33,7 +34,9 @@ const FontLoader = () => {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-        
+        import Content from './components/admin/content';
+import Content from './components/admin/content';
+
         /* Gravesend Sans Font Faces */
         @font-face {
           font-family: 'Gravesend Sans';
@@ -375,7 +378,7 @@ const ScrollToTop = () => {
 // Main App Component
 const App = () => {
   const [initialLoad, setInitialLoad] = useState(true);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Initialize auth from localStorage on app load
@@ -423,19 +426,43 @@ const App = () => {
                 </AuthGuard>
               }
             />
-            {/*<Route
+            <Route
               path="/admin/subscribers"
               element={
                 <AuthGuard>
                   <SubscriberManagement />
                 </AuthGuard>
               }
-            />*/}
+            />
             <Route
               path="/admin/newsletters"
               element={
                 <AuthGuard>
                   <NewsletterManagement />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/admin/settings"
+              element={
+                <AuthGuard>
+                  <Settings />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/admin/analytics"
+              element={
+                <AuthGuard>
+                  <Analytics />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/admin/content"
+              element={
+                <AuthGuard>
+                  <Content />
                 </AuthGuard>
               }
             />

@@ -23,7 +23,7 @@ urlpatterns = [
     path('api/newsletter/callback/', views.request_callback, name='request_callback'),
 
         # Admin Dashboard API endpoints
-    path('api/newsletter/', include('newsletter.dashboard_urls')),
+    path('api/newsletter/', include('core.dashboard_urls')),
     
     # JWT Token endpoints
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

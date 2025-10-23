@@ -142,6 +142,11 @@ const Footer = () => {
                   label: "Personal Concierge",
                   desc: "Bespoke service",
                 },
+                {
+                  to: "/admin/login",
+                  label: "Admin Portal",
+                  desc: "Manage services",
+                },
               ].map((link, index) => (
                 <Link
                   key={index}

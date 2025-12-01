@@ -16,7 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'hsp.co.zw',
-    'houseofstone-backend.onrender.com',
+    'obsidian-back3nd.onrender.com',
+    'obsidian-backend-n9jq.onrender.com'
     'obsidian-obvg.onrender.com',
     'localhost',
     '127.0.0.1'
@@ -25,7 +26,8 @@ ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     'https://hsp.co.zw',
     'https://obsidian-obvg.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com'
     'http://localhost:5175',
     'http://127.0.0.1:5175'
 ]
@@ -33,7 +35,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_TRUSTED_ORIGINS = [
     'https://hsp.co.zw',
     'https://obsidian-obvg.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com'
     'http://localhost:5175',
     'http://127.0.0.1:5175'
 ]
@@ -68,8 +71,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
     'https://hsp.co.zw',
-    'https://houseofstone.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-obvg.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com'
 ]
 
 # Application definition

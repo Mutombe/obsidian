@@ -6,7 +6,8 @@ from .settings import BASE_DIR
 # SECURITY SETTINGS
 ALLOWED_HOSTS = [
     os.environ.get('RENDER_EXTERNAL_HOSTNAME'),
-    'houseofstone-backend.onrender.com',
+    'obsidian-back3nd.onrender.com',
+    'obsidian-backend-n9jq.onrender.com'
     'obsidian-obvg.onrender.com',
     'hsp.co.zw/'
 ]
@@ -18,7 +19,8 @@ SECRET_KEY = SECRET_KEY
 CORS_ALLOWED_ORIGINS = [
     'https://hsp.co.zw',
     'https://obsidian-obvg.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com',
     'http://localhost:5176',
     'http://127.0.0.1:5176'
 ]
@@ -26,7 +28,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_TRUSTED_ORIGINS = [
     'https://hsp.co.zw',
     'https://obsidian-obvg.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com',
     'http://localhost:5176',
     'http://127.0.0.1:5176'
 ]
@@ -61,8 +64,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
     'https://hsp.co.zw',
-    'https://houseofstone.onrender.com',
-    'https://houseofstone-backend.onrender.com',
+    'https://obsidian-obvg.onrender.com',
+    'https://obsidian-back3nd.onrender.com',
+    'https://obsidian-backend-n9jq.onrender.com',
 ]
 
 # MIDDLEWARE CONFIGURATION

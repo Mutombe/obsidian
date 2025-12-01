@@ -15,7 +15,7 @@ import {
   Globe,
   Users,
   ChevronDown,
-  Loader2 ,
+  Loader2,
   Menu,
   X,
   Calendar,
@@ -27,7 +27,7 @@ import { FaPeopleArrows } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { IntegratedNavigation } from "./header";
 import axios from "axios";
-
+import { LazyImage } from "./header";
 
 const ObsidianNewsletter = () => {
   const [formData, setFormData] = useState({ name: "", email: "" });
@@ -44,9 +44,7 @@ const ObsidianNewsletter = () => {
 
     try {
       const response = await axios.post(
-        `${
-          "http://localhost:8000"
-        }/api/newsletter/subscribe/`,
+        `${"http://localhost:8000"}/api/newsletter/subscribe/`,
         formData
       );
 
@@ -80,14 +78,19 @@ const ObsidianNewsletter = () => {
 
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
+        <LazyImage
+          src="https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/bg1.jpg"
+          alt="Obsidian Background"
+          priority={true}
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url('https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/bg1.jpg')`,
+            width: "100%",
+            height: "100%",
+            opacity: 0.5,
           }}
         />
         {/* Additional gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
       </div>
 
       {/* Main content */}

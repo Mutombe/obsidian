@@ -19,7 +19,7 @@ import AdminDashboard from "./components/admin/dashboard";
 import Analytics from "./components/admin/analytics";
 import Content from "./components/admin/content";
 import Settings from "./components/admin/settings";
-import SubscriberManagement from "./components/admin/SubscriberManagement";
+//import SubscriberManagement from "./components/admin/SubscriberManagement";
 import NewsletterManagement from "./components/admin/newsletterManagement";
 import AdminLogin from "./components/admin/auth";
 import AuthGuard from "./components/admin/authGuard";
@@ -423,14 +423,6 @@ const App = () => {
               element={
                 <AuthGuard>
                   <AdminDashboard />
-                </AuthGuard>
-              }
-            />
-            <Route
-              path="/admin/subscribers"
-              element={
-                <AuthGuard>
-                  <SubscriberManagement />
                 </AuthGuard>
               }
             />

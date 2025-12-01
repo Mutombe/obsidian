@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { IntegratedNavigation } from "./header";
+import { LazyImage } from "./home";
 
 const ObsidianEventsPage = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -324,9 +325,10 @@ const EventCard = ({ event, index, onSelect }) => {
         <div
           className={`absolute inset-0 bg-gradient-to-br ${event.gradient} z-10`}
         />
-        <img
+        <LazyImage
           src={event.image}
           alt={event.title}
+          priority={true}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
 

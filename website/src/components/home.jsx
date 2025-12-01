@@ -20,7 +20,66 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { IntegratedNavigation } from "./header";
 import { useNavigate } from "react-router-dom";
-import { trackObsidianPageView, trackObsidianEvent, trackPackageView  } from "./cookieManager";
+import {
+  trackObsidianPageView,
+  trackObsidianEvent,
+  trackPackageView,
+} from "./cookieManager";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
+
+export const LazyImage = ({ src, alt, className, style, priority = false }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const { ref: imgRef, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "50px",
+  });
+
+  useEffect(() => {
+    if (priority || inView) {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setImageSrc(src);
+        setImageLoaded(true);
+      };
+    }
+  }, [src, inView, priority]);
+
+  return (
+    <div
+      ref={imgRef}
+      className={className}
+      style={{ ...style, position: "relative", overflow: "hidden" }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(135deg, #e3180d20, #ff780520)",
+          filter: imageLoaded ? "blur(0px)" : "blur(10px)",
+          transition: "filter 0.3s ease",
+        }}
+      />
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: imageLoaded ? 1 : 0,
+            transition: "opacity 0.3s ease",
+          }}
+          onLoad={() => setImageLoaded(true)}
+        />
+      )}
+    </div>
+  );
+};
 
 const ObsidianHero = () => {
   const navigate = useNavigate();
@@ -32,24 +91,24 @@ const ObsidianHero = () => {
     });
   }, []);
 
-    const handleExplorePackages = () => {
-    trackObsidianEvent('explore_packages_click', {
-      button_location: 'hero_section',
-      page: 'home',
-      user_intent: 'package_discovery'
+  const handleExplorePackages = () => {
+    trackObsidianEvent("explore_packages_click", {
+      button_location: "hero_section",
+      page: "home",
+      user_intent: "package_discovery",
     });
-    
+
     // Your existing navigation logic
     navigate("/newsletter");
   };
 
   const handleViewEvents = () => {
-    trackObsidianEvent('view_events_click', {
-      button_location: 'hero_section',
-      page: 'home',
-      user_intent: 'event_discovery'
+    trackObsidianEvent("view_events_click", {
+      button_location: "hero_section",
+      page: "home",
+      user_intent: "event_discovery",
     });
-    
+
     // Your existing navigation logic
     navigate("/events");
   };
@@ -58,7 +117,6 @@ const ObsidianHero = () => {
     <section
       className="relative min-h-screen flex overflow-hidden"
       style={{ overflow: "hidden", marginTop: "0", paddingTop: "0" }}
-
     >
       {/* Integrated Navigation */}
       <IntegratedNavigation pageType="transparent" />
@@ -74,14 +132,18 @@ const ObsidianHero = () => {
         </div>
 
         {/* Right Half - White & Gold with Image */}
-        <div
-          className="w-1/2 relative bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pp1.jpg')`,
-          }}
-        >
-          <div className="absolute inset-0"></div>
-          <div className="absolute inset-0 bg-gradient-to-bl from-yellow-400/10 via-transparent to-yellow-600/20"></div>
+        <div className="w-1/2 relative">
+          <LazyImage
+            src="https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pp1.jpg"
+            alt="Obsidian Elite VIP Experience"
+            priority={true}
+            className="absolute inset-0"
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-bl from-yellow-400/10 via-transparent to-yellow-600/20 z-10"></div>
         </div>
       </div>
 
@@ -247,21 +309,34 @@ const Features = () => {
               >
                 {/* Large Number with Image Fill */}
                 <div className="flex-shrink-0 relative">
+                  {/* Number with LazyImage and mask */}
                   <div className="relative">
-                    {/* Number with image fill using background-clip */}
+                    {/* The actual number acts as a mask */}
                     <div
-                      className="gravesend-sans font-bold text-[200px] lg:text-[280px] leading-none select-none bg-cover bg-center bg-no-repeat"
-                      style={{
-                        backgroundImage: `url(${feature.image})`,
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        color: "transparent",
-                      }}
+                      className="relative overflow-hidden"
+                      style={{ width: "280px", height: "280px" }}
                     >
-                      {feature.number}
+                      <LazyImage
+                        src={feature.image}
+                        alt={`${feature.title} background`}
+                        priority={true} // Load first feature immediately
+                        className="absolute inset-0"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='180' font-weight='bold' font-family='Gravesend Sans'%3E${feature.number}%3C/text%3E%3C/svg%3E")`,
+                          WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='180' font-weight='bold' font-family='Gravesend Sans'%3E${feature.number}%3C/text%3E%3C/svg%3E")`,
+                          maskSize: "contain",
+                          WebkitMaskSize: "contain",
+                          maskRepeat: "no-repeat",
+                          WebkitMaskRepeat: "no-repeat",
+                          maskPosition: "center",
+                          WebkitMaskPosition: "center",
+                        }}
+                      />
                     </div>
 
-                    {/* Fallback/outline for browsers that don't support background-clip */}
+                    {/* Fallback outline */}
                     <div className="gravesend-sans font-light absolute inset-0 text-[200px] lg:text-[280px] leading-none select-none text-transparent bg-gradient-to-b from-gray-400/20 to-gray-600/10 bg-clip-text -z-10">
                       {feature.number}
                     </div>

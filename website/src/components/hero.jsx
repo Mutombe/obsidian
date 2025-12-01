@@ -10,6 +10,7 @@ import {
   CheckCircle,
   Calendar
 } from 'lucide-react';
+import { LazyImage } from './header';
 
 const HospitalityOfferings = () => {
   const offerings = [

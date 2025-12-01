@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { CiMenuFries } from "react-icons/ci";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
@@ -6,6 +6,55 @@ import { TbBrandGoogleHome } from "react-icons/tb";
 import { BsEnvelopeAt } from "react-icons/bs";
 import { MdOutlineEventNote } from "react-icons/md";
 import { IoIosContact } from "react-icons/io";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
+
+export const LazyImage = ({ src, alt, className, style, priority = false }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef();
+  const isInView = useInView(imgRef, { once: true, margin: "50px" });
+
+  useEffect(() => {
+    if (priority || isInView) {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setImageSrc(src);
+        setImageLoaded(true);
+      };
+    }
+  }, [src, isInView, priority]);
+
+  return (
+    <div ref={imgRef} className={className} style={{ ...style, position: 'relative', overflow: 'hidden' }}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, #e3180d20, #ff7805020)',
+          filter: imageLoaded ? 'blur(0px)' : 'blur(10px)',
+          transition: 'filter 0.3s ease',
+        }}
+      />
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: imageLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+          }}
+          onLoad={() => setImageLoaded(true)}
+        />
+      )}
+    </div>
+  );
+};
 
 export const IntegratedNavigation = ({ 
   pageType = "transparent", // "transparent", "dark", or "light"
@@ -50,7 +99,7 @@ export const IntegratedNavigation = ({
      { path: "/events", label: "Events", icon: MdOutlineEventNote },
     { path: "/newsletter", label: "Newsletter", icon: BsEnvelopeAt },
     { path: "/contact", label: "Contact", icon: IoIosContact },
-    { path: "/template", label: "NL Template", icon: IoIosContact },
+    //{ path: "/template", label: "NL Template", icon: IoIosContact },
   ];
 
   // Get navigation background based on scroll and page type
@@ -111,10 +160,11 @@ export const IntegratedNavigation = ({
             <a href="/" className="group flex items-center space-x-3 relative">
               <div className="absolute -inset-2  bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
               <div className="relative">
-                <img
+                <LazyImage
                   src="/logo4.png"
                   alt="Obsidian Lifestyle Logo"
                   className="w-40 h-13 transition-all duration-300 group-hover:scale-105"
+                  priority={true}
                 />
               </div>
             </a>

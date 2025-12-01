@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-!j_03(_4wh_4tt2if)%of7&!&9170)&y9*b^gg1fxb=c1hmqrj
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'hsp.co.zw',
+    'obsidianlifestyle.com',
     'obsidian-back3nd.onrender.com',
     'obsidian-backend-n9jq.onrender.com'
     'obsidian-obvg.onrender.com',
@@ -24,7 +24,7 @@ ALLOWED_HOSTS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com'
@@ -33,7 +33,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_TRUSTED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com'
@@ -70,7 +70,7 @@ CORS_EXPOSE_HEADERS = ['content-type', 'authorization']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com'
@@ -126,7 +126,19 @@ DEFAULT_FROM_EMAIL = 'noreply@hospital.com'
 ADMIN_EMAIL = 'simbamtombe@gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-SITE_URL = os.environ.get('SITE_URL', 'https://obsidian.co.zw')
+SITE_URL = os.environ.get('SITE_URL', 'https://obsidianlifestyle.com')
+
+NEWSLETTER_FROM_EMAIL = 'info@obsidianlifestyle.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'simbamtombe@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'itzh jjkc hdmv csih'
+DEFAULT_FROM_EMAIL = 'noreply@hospital.com'
+ADMIN_EMAIL = 'simbamtombe@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+SITE_URL = os.environ.get('SITE_URL', 'https://obsidianlifestyle.com')
 
 
 # Sports API (API-Sports)

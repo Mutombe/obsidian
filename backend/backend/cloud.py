@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
     'obsidian-back3nd.onrender.com',
     'obsidian-backend-n9jq.onrender.com'
     'obsidian-obvg.onrender.com',
-    'hsp.co.zw/'
+    'obsidianlifestyle.com/'
 ]
 
 DEBUG = True
@@ -17,7 +17,7 @@ SECRET_KEY = SECRET_KEY
 
 # CORS SETTINGS
 CORS_ALLOWED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com',
@@ -26,7 +26,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_TRUSTED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com',
@@ -63,7 +63,7 @@ CORS_EXPOSE_HEADERS = ['content-type', 'authorization']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://hsp.co.zw',
+    'https://obsidianlifestyle.com',
     'https://obsidian-obvg.onrender.com',
     'https://obsidian-back3nd.onrender.com',
     'https://obsidian-backend-n9jq.onrender.com',

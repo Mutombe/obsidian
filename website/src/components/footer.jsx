@@ -216,7 +216,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex items-center space-x-6">
               <p className="century-gothic text-gray-400 text-sm">
-                © 2025 Obsidian Lifestyle, a product of Bard Santner Markets.
+                &copy; {new Date().getFullYear()} Obsidian Lifestyle, a product of Bard Santner Markets.
                 All rights reserved.
               </p>
             </div>

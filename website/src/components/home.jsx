@@ -134,7 +134,7 @@ const ObsidianHero = () => {
         {/* Right Half - White & Gold with Image */}
         <div className="w-1/2 relative">
           <LazyImage
-            src="https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/pp1.jpg"
+            src="/pp1.jpg"
             alt="Obsidian Elite VIP Experience"
             priority={true}
             className="absolute inset-0"

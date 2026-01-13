@@ -15,6 +15,7 @@ import {
   Globe,
   Users,
   ChevronDown,
+  AlertCircle,
   Loader2,
   Menu,
   X,
@@ -79,7 +80,7 @@ const ObsidianNewsletter = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <LazyImage
-          src="https://bard-santner.sgp1.cdn.digitaloceanspaces.com/obsidian/bg1.jpg"
+          src="/bg1.jpg"
           alt="Obsidian Background"
           priority={true}
           className="absolute inset-0"
